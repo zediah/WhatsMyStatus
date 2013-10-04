@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="WhatsMyStatus_DnD_.Views.Dialogs.CharacterCreationPopup"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="500" d:DesignWidth="300">
+    
+    <StackPanel ScrollViewer.HorizontalScrollBarVisibility="Auto" Width="300" x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}">
+        <TextBlock Margin="10,0" Text="Lets create a character!"/>
+        <TextBlock Margin="10,0" Text="Name"/>
+        <TextBox Name="tbName"/>
+        <TextBlock Margin="10,0" Text="Class"/>
+        <TextBox Name="tbClass"/>
+        <TextBlock Margin="10,0" Text="Level"/>
+        <TextBox Name="tbLevel" InputScope="Number"/>
+        <TextBlock Margin="10,0" Text="Max Hp" />
+        <TextBox Name="tbMaxHp" InputScope="Number"/>
+        <Button Name="okButton"  Content="Done"></Button>
+    </StackPanel>
+</UserControl>
