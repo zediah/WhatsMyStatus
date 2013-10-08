@@ -7,6 +7,7 @@
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
     xmlns:ec="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
     xmlns:Generic="clr-namespace:System.Collections.Generic;assembly=System"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     x:Class="WhatsMyStatus_DnD_.Views.CharacterView"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -14,12 +15,18 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="480" d:DesignWidth="480">
 
-    <ListBox ItemsSource="{Binding}" Name="lb" HorizontalContentAlignment="Stretch" MouseLeftButtonDown="lb_MouseLeftButtonDown">
+    <ListBox ItemsSource="{Binding}"  Hold="lb_Hold" Name="lb" HorizontalContentAlignment="Stretch" Tap="lb_Tap">
                 <ListBox.ItemTemplate >
-                    <DataTemplate>
-                        <Border BorderBrush="Red" BorderThickness="1">
-                            <Grid Width="440">
-                                <Grid.ColumnDefinitions>
+                <DataTemplate>
+                <Border BorderBrush="Red" BorderThickness="1">
+                    <toolkit:ContextMenuService.ContextMenu>
+                    <toolkit:ContextMenu>
+                        <toolkit:MenuItem Name="miEdit" Header="Edit"  Click="miEdit_Click"></toolkit:MenuItem>
+                        <toolkit:MenuItem Name="miRemove" Header="Remove" Click="miRemove_Click"></toolkit:MenuItem>
+                    </toolkit:ContextMenu>
+                    </toolkit:ContextMenuService.ContextMenu>
+                    <Grid Width="440">
+                        <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
@@ -38,9 +45,9 @@
                                 <Run x:Name="Level" Text="{Binding Level, Mode=OneWay}"/>
                             </TextBlock>
                         </Grid>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
+                </Grid>
+                    </Border>
+            </DataTemplate>
                 </ListBox.ItemTemplate>
         </ListBox>
 </UserControl>

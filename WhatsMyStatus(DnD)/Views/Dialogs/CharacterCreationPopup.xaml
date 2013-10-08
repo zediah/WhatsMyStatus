@@ -9,16 +9,16 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="500" d:DesignWidth="300">
     
-    <StackPanel ScrollViewer.HorizontalScrollBarVisibility="Auto" Width="300" x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}">
+    <StackPanel DataContext="{Binding Character}" Width="300" x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}">
         <TextBlock Margin="10,0" Text="Lets create a character!"/>
         <TextBlock Margin="10,0" Text="Name"/>
-        <TextBox Name="tbName"/>
+        <TextBox Name="tbName" Text="{Binding Name, Mode=TwoWay}" />
         <TextBlock Margin="10,0" Text="Class"/>
-        <TextBox Name="tbClass"/>
-        <TextBlock Margin="10,0" Text="Level"/>
-        <TextBox Name="tbLevel" InputScope="Number"/>
+        <TextBox Name="tbClass" Text="{Binding CharacterClass, Mode=TwoWay}"/>
+        <TextBlock Margin="10,0" Text="Level" />
+        <TextBox Name="tbLevel" InputScope="Number" Text="{Binding Level, Mode=TwoWay}"/>
         <TextBlock Margin="10,0" Text="Max Hp" />
-        <TextBox Name="tbMaxHp" InputScope="Number"/>
+        <TextBox Name="tbMaxHp" InputScope="Number" Text="{Binding MaxHp, Mode=TwoWay}"/>
         <Button Name="okButton"  Content="Done"></Button>
     </StackPanel>
 </UserControl>

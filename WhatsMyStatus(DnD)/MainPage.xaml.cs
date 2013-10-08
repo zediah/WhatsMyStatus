@@ -37,6 +37,9 @@ namespace WhatsMyStatus_DnD_
             Popup popup = new Popup();
 
             var control = new CharacterCreationPopup();
+            var newChar = new WmsCharacter();
+            control.Character = newChar;
+            control.BindControls();
             popup.VerticalOffset = 100;
             popup.HorizontalOffset = 70;
 
@@ -44,11 +47,11 @@ namespace WhatsMyStatus_DnD_
             {
                 if (control.AllFilledIn())
                 {
-                    WmsCharacter newChar = new WmsCharacter();
-                    newChar.Name = control.tbName.Text;
-                    newChar.Level = int.Parse(control.tbLevel.Text);
-                    newChar.MaxHp = int.Parse(control.tbMaxHp.Text);
-                    newChar.CharacterClass = control.tbClass.Text;
+                    //WmsCharacter newChar = new WmsCharacter();
+                    //newChar.Name = control.tbName.Text;
+                    //newChar.Level = int.Parse(control.tbLevel.Text);
+                    //newChar.MaxHp = int.Parse(control.tbMaxHp.Text);
+                    //newChar.CharacterClass = control.tbClass.Text;
 
                     WmsFakeDb.Database.Add(newChar);
                     MessageBox.Show("Character Creation Succesful.\n" + newChar.Name + " is ready to rumble!");

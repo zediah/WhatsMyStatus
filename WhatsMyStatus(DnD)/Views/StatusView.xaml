@@ -7,9 +7,33 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    d:DesignHeight="480" d:DesignWidth="480">
+    d:DesignHeight="100" d:DesignWidth="480">
     
-    <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}">
-
-    </Grid>
+    <Border BorderThickness="1" BorderBrush="BlanchedAlmond">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40" Text="{Binding Name}"></TextBlock>
+            <Border Grid.Column="1" BorderThickness="1,0,1,0" BorderBrush="BlanchedAlmond">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock   VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Grid.Column="0" Grid.Row="0" Text="Rounds: "></TextBlock>
+                    <TextBox InputScope="Number" Name="txt_Remaining" Grid.Column="1" Grid.Row="0" Text="{Binding RoundsRemaining, Mode=TwoWay}"></TextBox>
+                    <Button Name="minusRound" Grid.Column="0" Grid.Row="1" Content="-" Click="minusRound_Click"></Button>
+                    <Button Name="addRound" Grid.Column="1" Grid.Row="1" Content="+" Click="addRound_Click"></Button>
+                </Grid>
+            </Border>
+            <CheckBox Name="cb_ActiveStatus"   HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Unchecked="cb_ActiveStatus_Checked" Checked="cb_ActiveStatus_Checked"></CheckBox>
+        </Grid>
+    </Border>
 </UserControl>

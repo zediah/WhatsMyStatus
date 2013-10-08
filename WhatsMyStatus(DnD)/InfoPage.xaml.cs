@@ -48,6 +48,8 @@ namespace WhatsMyStatus_DnD_
                 tempHpCvs.Source = WmsFakeDb.Database.Combats;
                 tempHpCvs.Filter += (sender, args) => args.Accepted = ((WmsCombat)args.Item).ChangeReason == HpChangeReasons.TempHp && ((WmsCombat)args.Item).Character.Dbseqnum == CurrentCharacter.Dbseqnum;
 
+                statusListSelector.ItemsSource = WmsFakeDb.Database.Statuses;
+
                 normalCombat.DataContext = normalHpCvs;
                 tempCombat.DataContext = tempHpCvs;
             }
