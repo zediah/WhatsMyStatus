@@ -147,9 +147,14 @@ namespace WhatsMyStatus_DnD_.ViewModels
                 case HpChangeReasons.Heal:
                     // You can only heal to a maximum of your current hp.
                     // Thus if the heal would take you over your maximum hp - make it only do the amount up to the max hp.
+                    // If we get healed, we get healed from a minimum of 0 and up - not from the negative number and up.
                     if (GetCurrentHp() + changeInHp > MaxHp)
                     {
                         changeInHp = MaxHp - GetCurrentHp();
+                    }
+                    else if (GetCurrentHp() < 0)
+                    {
+                        changeInHp -= GetCurrentHp();
                     }
                     break;
             }

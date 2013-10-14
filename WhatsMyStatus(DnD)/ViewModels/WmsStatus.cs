@@ -47,6 +47,23 @@ namespace WhatsMyStatus_DnD_.ViewModels
 
         }
 
+        private bool _roundsRequired = false;
+
+        /// <summary>
+        /// Whether a rounds count is required for this status
+        /// </summary>
+        public bool RoundsRequired
+        {
+            get { return _roundsRequired; }
+            set { if (_roundsRequired != value)
+            {
+                _roundsRequired = value;
+                NotifyPropertyChanged("RoundsRequired");
+            }}
+        }
+
+
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void NotifyPropertyChanged(string propertyName)

@@ -6,7 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:Coverters="clr-namespace:WhatsMyStatus_DnD_.Coverters" mc:Ignorable="d"
+    xmlns:Coverters="clr-namespace:WhatsMyStatus_DnD_.Converters" mc:Ignorable="d"
     xmlns:views="clr-namespace:WhatsMyStatus_DnD_.Views"
     d:DataContext="{d:DesignData SampleData/MainViewModelSampleData.xaml}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -41,7 +41,7 @@
         <phone:Panorama Margin="0,0,0,0">
             <!--Panorama item one-->
             <phone:PanoramaItem>
-                <Grid ScrollViewer.VerticalScrollBarVisibility="Auto" ShowGridLines="True">
+                <Grid ScrollViewer.VerticalScrollBarVisibility="Auto">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
                         <RowDefinition />

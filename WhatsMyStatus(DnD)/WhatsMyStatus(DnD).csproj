@@ -94,6 +94,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\HpColourConverter.cs" />
+    <Compile Include="Converters\VisibilityConverter.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="InfoPage.xaml.cs">
       <DependentUpon>InfoPage.xaml</DependentUpon>
@@ -129,6 +130,9 @@
     <Compile Include="Views\Dialogs\HealthChangePopup.xaml.cs">
       <DependentUpon>HealthChangePopup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\StatusRoundsView.xaml.cs">
+      <DependentUpon>StatusRoundsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\StatusView.xaml.cs">
       <DependentUpon>StatusView.xaml</DependentUpon>
     </Compile>
@@ -163,6 +167,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Dialogs\HealthChangePopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StatusRoundsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -104,6 +104,7 @@ namespace WhatsMyStatus_DnD_
         // This code will not execute when the application is closing
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
+            WmsFakeDb.Database.SaveUpdatesToIsolatedStorage();
             // Ensure that required application state is persisted here.
         }
 
@@ -111,6 +112,7 @@ namespace WhatsMyStatus_DnD_
         // This code will not execute when the application is deactivated
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
+            WmsFakeDb.Database.SaveUpdatesToIsolatedStorage();
         }
 
         // Code to execute if a navigation fails

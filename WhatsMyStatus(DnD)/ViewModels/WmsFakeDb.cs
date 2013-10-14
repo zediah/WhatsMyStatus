@@ -126,12 +126,22 @@ namespace WhatsMyStatus_DnD_.ViewModels
 
         public bool IsDataLoaded = false;
 
+        public void SaveUpdatesToIsolatedStorage()
+        {
+            IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
+            settings.Save();
+        }
+
         public void SetupFromIsolatedStorage()
         {
             LoadFromIsolatedStorage<WmsCharacter>();
             LoadFromIsolatedStorage<WmsCharacterStatus>();
             LoadFromIsolatedStorage<WmsStatus>();
             LoadFromIsolatedStorage<WmsCombat>();
+            foreach(var value in Statuses.Take(10))
+            {
+                value.RoundsRequired = true;
+            }
         }
 
         private void LoadFromIsolatedStorage<T>() where T: WmsPrimaryObject

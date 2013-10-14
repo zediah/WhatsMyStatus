@@ -3,13 +3,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
+    xmlns:views="clr-namespace:WhatsMyStatus_DnD_.Views" 
+             
+             mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="100" d:DesignWidth="480">
+
     
-    <Border BorderThickness="1" BorderBrush="BlanchedAlmond">
+    <Border BorderThickness="1" BorderBrush="BlanchedAlmond" Loaded="Border_Loaded" >
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"></ColumnDefinition>
@@ -17,22 +20,7 @@
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40" Text="{Binding Name}"></TextBlock>
-            <Border Grid.Column="1" BorderThickness="1,0,1,0" BorderBrush="BlanchedAlmond">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <TextBlock   VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Grid.Column="0" Grid.Row="0" Text="Rounds: "></TextBlock>
-                    <TextBox InputScope="Number" Name="txt_Remaining" Grid.Column="1" Grid.Row="0" Text="{Binding RoundsRemaining, Mode=TwoWay}"></TextBox>
-                    <Button Name="minusRound" Grid.Column="0" Grid.Row="1" Content="-" Click="minusRound_Click"></Button>
-                    <Button Name="addRound" Grid.Column="1" Grid.Row="1" Content="+" Click="addRound_Click"></Button>
-                </Grid>
-            </Border>
+            <views:StatusRoundsView Grid.Column="1" Name="statusRoundView" Visibility="{Binding ShowRounds, FallbackValue=Collapsed, Converter={StaticResource ResourceKey=VisibilityConverter}}" ></views:StatusRoundsView>
             <CheckBox Name="cb_ActiveStatus"   HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Unchecked="cb_ActiveStatus_Checked" Checked="cb_ActiveStatus_Checked"></CheckBox>
         </Grid>
     </Border>

@@ -63,6 +63,21 @@ namespace WhatsMyStatus_DnD_.ViewModels
                     NotifyPropertyChanged(("Character"));
                 }
             }
+        }
+
+        private bool _showRounds;
+
+        public bool ShowRounds
+        {
+            get { return _showRounds; }
+            set
+            {
+                if (_showRounds != value)
+                {
+                    _showRounds = value;
+                    NotifyPropertyChanged("ShowRounds");
+                }
+            }
 
         }
 

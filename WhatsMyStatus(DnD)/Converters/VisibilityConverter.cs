@@ -4,30 +4,23 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
-using System.Windows.Media;
 
 namespace WhatsMyStatus_DnD_.Converters
 {
-    public class HpColourConverter : IValueConverter
+    public class VisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value != null)
-            {
-                int val = (int)value;
-                if (val < 0)
-                {
-                    return new SolidColorBrush(Colors.Red);
-                }
-                return new SolidColorBrush(Colors.Green);
-            }
-            return new SolidColorBrush(Colors.Purple);
+            bool visibility = (bool) value;
+            return visibility ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            Visibility vis = (Visibility) value;
+            return (vis == Visibility.Visible);
         }
     }
 }

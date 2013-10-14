@@ -14,29 +14,13 @@ namespace WhatsMyStatus_DnD_.Views
     public partial class StatusView : UserControl
     {
         public WmsCharacter Character { get; set; }
+
         public StatusView()
         {
             InitializeComponent();
         }
 
-        private void addRound_Click(object sender, RoutedEventArgs e)
-        {
-            var charStatus = txt_Remaining.DataContext as WmsCharacterStatus;
-            if (charStatus != null)
-            {
-                charStatus.RoundsRemaining++;
-            }
-        }
-
-        private void minusRound_Click(object sender, RoutedEventArgs e)
-        {
-            var charStatus = txt_Remaining.DataContext as WmsCharacterStatus;
-            if (charStatus != null)
-            {
-                charStatus.RoundsRemaining--;
-            }
-        }
-
+      
         private void cb_ActiveStatus_Checked(object sender, RoutedEventArgs e)
         {
             if (cb_ActiveStatus.IsChecked.GetValueOrDefault())
@@ -56,23 +40,41 @@ namespace WhatsMyStatus_DnD_.Views
 
         private void CreateCharacterStatus()
         {
-            WmsCharacterStatus cs = new WmsCharacterStatus();
-            cs.RoundsRemaining = 1;
-            cs.Character = GetCharacter();
-            cs.Status = DataContext as WmsStatus;
+            var status = DataContext as WmsStatus;
+            if (status != null)
+            {
+                WmsCharacterStatus charStatus = statusRoundView.DataContext as WmsCharacterStatus;
+                if (charStatus == null)
+                {
+                    charStatus = new WmsCharacterStatus();
+                    charStatus.RoundsRemaining = 1;
+                    charStatus.Character = GetCharacter();
+                    charStatus.Status = status;
 
-            WmsFakeDb.Database.Add(cs);
-
-            txt_Remaining.DataContext = cs;
+                    WmsFakeDb.Database.Add(charStatus);
+                    statusRoundView.DataContext = charStatus;
+                }
+                charStatus.ShowRounds = status.RoundsRequired;
+            }
         }
 
         private void RemoveCharacterStatus()
         {
-            var charStatus = txt_Remaining.DataContext as WmsCharacterStatus;
+            var charStatus = statusRoundView.DataContext as WmsCharacterStatus;
             if (charStatus != null)
             {
-                txt_Remaining.DataContext = null;
+                statusRoundView.DataContext = null;
                 WmsFakeDb.Database.Remove(charStatus);
+            }
+        }
+
+        private void Border_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Try see if our character is already affected by this status
+            var charStatus = WmsFakeDb.Database.CharacterStatuses.FirstOrDefault(x => x.Character == Character && x.Status == ((WmsStatus) DataContext));
+            if (charStatus != null)
+            {
+                statusRoundView.DataContext = charStatus;
             }
         }
     }
