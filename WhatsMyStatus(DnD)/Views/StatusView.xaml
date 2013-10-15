@@ -12,8 +12,8 @@
     d:DesignHeight="100" d:DesignWidth="480">
 
     
-    <Border BorderThickness="1" BorderBrush="BlanchedAlmond" Loaded="Border_Loaded" >
-        <Grid>
+    <Border BorderThickness="1" BorderBrush="BlanchedAlmond" Loaded="Border_Loaded">
+        <Grid Name="viewGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"></ColumnDefinition>
                 <ColumnDefinition Width="2*"></ColumnDefinition>

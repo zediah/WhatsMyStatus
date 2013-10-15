@@ -13,8 +13,6 @@ namespace WhatsMyStatus_DnD_.Views
 {
     public partial class StatusView : UserControl
     {
-        public WmsCharacter Character { get; set; }
-
         public StatusView()
         {
             InitializeComponent();
@@ -35,7 +33,9 @@ namespace WhatsMyStatus_DnD_.Views
 
         private WmsCharacter GetCharacter()
         {
-            return Character;
+
+            var character = PhoneApplicationService.Current.State["Character"] as WmsCharacter;
+            return character;
         }
 
         private void CreateCharacterStatus()
@@ -70,8 +70,9 @@ namespace WhatsMyStatus_DnD_.Views
 
         private void Border_Loaded(object sender, RoutedEventArgs e)
         {
+            var character = GetCharacter();
             // Try see if our character is already affected by this status
-            var charStatus = WmsFakeDb.Database.CharacterStatuses.FirstOrDefault(x => x.Character == Character && x.Status == ((WmsStatus) DataContext));
+            var charStatus = WmsFakeDb.Database.CharacterStatuses.FirstOrDefault(x => x.Character.Equals(character) && x.Status.Equals((WmsStatus) DataContext));
             if (charStatus != null)
             {
                 statusRoundView.DataContext = charStatus;

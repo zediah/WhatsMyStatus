@@ -8,7 +8,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Coverters="clr-namespace:WhatsMyStatus_DnD_.Converters" mc:Ignorable="d"
     xmlns:views="clr-namespace:WhatsMyStatus_DnD_.Views"
-    d:DataContext="{d:DesignData SampleData/MainViewModelSampleData.xaml}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -37,9 +36,7 @@
             CurrentUICulture of the app at run time.
          -->
 
-         <!--Panorama control-->
         <phone:Panorama Margin="0,0,0,0">
-            <!--Panorama item one-->
             <phone:PanoramaItem>
                 <Grid ScrollViewer.VerticalScrollBarVisibility="Auto">
                     <Grid.RowDefinitions>
@@ -52,23 +49,29 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Name="hpText"  Text="HP" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center"></TextBlock>
-                    <TextBlock Name="tempHpText" Text="Temp Hp" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center"></TextBlock>
-                    <StackPanel Grid.Row="1" Grid.Column="0">
-                        <views:CombatView x:Name="normalCombat"/>
-                     </StackPanel>
-                    <StackPanel Grid.Row="1" Grid.Column="1">
-                        <views:CombatView x:Name="tempCombat"/>
-                    </StackPanel>
+                    <Border Grid.Column="0" Grid.Row="0" BorderThickness="0,0,1,1" BorderBrush="White">
+                        <TextBlock Name="hpText"  Text="HP"  HorizontalAlignment="Center"></TextBlock>
+                    </Border>
+                    <Border Grid.Column="1" Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="White">
+                        <TextBlock Name="tempHpText" Text="Temp Hp"   HorizontalAlignment="Center"></TextBlock>
+                    </Border>
+                    <Border  Grid.Row="1" Grid.Column="0" BorderThickness="0,0,1,1" BorderBrush="White">
+                         <StackPanel>
+                            <views:CombatView x:Name="normalCombat"/>
+                         </StackPanel>
+                    </Border>
+                    <Border  Grid.Row="1" Grid.Column="1" BorderThickness="0,0,0,1" BorderBrush="White">
+                        <StackPanel>
+                            <views:CombatView x:Name="tempCombat"/>
+                        </StackPanel>
+                    </Border>
                     <Button Name="btnHeal" Content="Heal" Grid.Column="0" Grid.Row="2" Click="btnHeal_Click"></Button>
                     <Button Name="btnTempHp" Content="Temp Hp" Grid.Column="1" Grid.Row="2" Click="btnTempHp_Click"></Button>
                     <Button Name="btnBeenHit" Content="I've been hit!" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="3" Click="btnBeenHit_Click"></Button>
                 </Grid>
             </phone:PanoramaItem>
 
-            <!--Panorama item two-->
             <phone:PanoramaItem>
-                <!--Double line list with image placeholder and text wrapping using a floating header that scrolls with the content-->
                 <phone:LongListSelector Name="statusListSelector" Margin="0,-38,-22,2">
                     <phone:LongListSelector.ListHeaderTemplate>
                         <DataTemplate>
@@ -77,7 +80,7 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Text="Statuses...Status"
+                                <TextBlock Text="Statuses"
                                            Style="{StaticResource PanoramaItemHeaderTextStyle}"
                                            Grid.Row="0"/>
                             </Grid>
@@ -91,25 +94,23 @@
                 </phone:LongListSelector>
             </phone:PanoramaItem>
 
-            <!--Panorama item three-->
-            <phone:PanoramaItem Header="third item" Orientation="Horizontal">
-                <!--Double wide Panorama with large image placeholders-->
-                <Grid>
+            <phone:PanoramaItem Header="Other Options" Orientation="Vertical">
                     <StackPanel Margin="0,4,16,0" Orientation="Vertical" VerticalAlignment="Top">
-                        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                            <Border Background="#FFFFC700" Height="173" Width="173" Margin="12,0,0,0"/>
-                            <Border Background="#FFFFC700" Height="173" Width="173" Margin="12,0,0,0"/>
-                            <Border Background="#FFFFC700" Height="173" Width="173" Margin="12,0,0,0"/>
-                            <Border Background="#FFFFC700" Height="173" Width="173" Margin="12,0,0,0"/>
-                        </StackPanel>
-                        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Margin="0,12,0,0">
-                            <Border Background="#FFFFC700" Height="173" Width="173" Margin="12,0,0,0"/>
-                            <Border Background="#FFFFC700" Height="173" Width="173" Margin="12,0,0,0"/>
-                            <Border Background="#FFFFC700" Height="173" Width="173" Margin="12,0,0,0"/>
-                            <Border Background="#FFFFC700" Height="173" Width="173" Margin="12,0,0,0"/>
-                        </StackPanel>
-                    </StackPanel>
-                </Grid>
+                        <Button Name="btn_FullReset" Content="Full Reset" Click="btn_FullReset_Click"></Button>
+                        <Button Name="btn_RoundOver" Content="Round Over" Click="btn_RoundOver_Click"></Button>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  VerticalAlignment="Center" TextAlignment="Center" Text="Surges"></TextBlock>
+                        <TextBox Grid.Column="1" Name="txt_Surges"></TextBox>
+                        <Button Grid.Column="2" Name="btn_AddSurge" Content="+" Click="btn_SpendSurge_Click"></Button>
+                        <Button Grid.Column="3" Name="btn_RemoveSurge" Content="-"></Button>
+                    </Grid>
+                </StackPanel>
             </phone:PanoramaItem>
         </phone:Panorama>
 

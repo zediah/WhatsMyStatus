@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace WhatsMyStatus_DnD_.ViewModels.Core
 {
-    public class WmsPrimaryObject
+    public class WmsPrimaryObject : IEquatable<WmsPrimaryObject>
     {
         public const string F_Dbseqnum = "dbseqnum";
 
@@ -101,6 +101,31 @@ namespace WhatsMyStatus_DnD_.ViewModels.Core
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        //public static bool operator ==(WmsPrimaryObject x, WmsPrimaryObject y)
+        //{
+        //    if ((object)x == null)
+        //        return false;
+        //    return x.Equals(y);
+        //}
+
+        //public static bool operator !=(WmsPrimaryObject x, WmsPrimaryObject y)
+        //{
+        //    if ((object)x == null)
+        //        return false;
+        //    return !x.Equals(y);
+        //}
+
+        public bool Equals(WmsPrimaryObject other)
+        {
+            // If we have a lower than zero dbseqnum = we can't be the same because we're new and un-added
+            // We also have to make sure they're the same object class...
+            if (other == null || this.Dbseqnum <= 0 || other.GetType() != this.GetType())
+                return false;
+            else
+                // Basically a primary key comparison
+                return other.Dbseqnum == this.Dbseqnum;
         }
 
         public override string ToString()

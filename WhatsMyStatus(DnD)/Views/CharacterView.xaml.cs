@@ -20,11 +20,6 @@ namespace WhatsMyStatus_DnD_.Views
             InitializeComponent();
         }
 
-        private void lb_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            
-        }
-
         private void lb_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             var selectedItem = lb.SelectedItem as WmsCharacter;

@@ -134,6 +134,8 @@ namespace WhatsMyStatus_DnD_.ViewModels
 
         public void SetupFromIsolatedStorage()
         {
+            //WipeIsolatedStorage<WmsCombat>();
+            //WipeIsolatedStorage<WmsCharacterStatus>();
             LoadFromIsolatedStorage<WmsCharacter>();
             LoadFromIsolatedStorage<WmsCharacterStatus>();
             LoadFromIsolatedStorage<WmsStatus>();
@@ -148,12 +150,33 @@ namespace WhatsMyStatus_DnD_.ViewModels
         {
             IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
             var key = typeof (T).FullName;
-            if (settings.Contains(key))
+            if (key != null)
             {
-                foreach(var value in (IList<T>)settings[key])
+                if (!settings.Contains(key))
+                {
+                    settings.Add(key, new List<T>());
+                }
+
+                if (settings[key] == null)
+                {
+                    settings[key] = new List<T>();
+                }
+
+                foreach (var value in (IList<T>) settings[key])
                 {
                     Add(value);
                 }
+            }
+        }
+
+        private void WipeIsolatedStorage<T>() where T : WmsPrimaryObject
+        {
+            IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
+            var key = typeof(T).FullName;
+            if (settings.Contains(key))
+            {
+                ((IList<T>)settings[key]).Clear();
+                settings.Save();
             }
         }
     }

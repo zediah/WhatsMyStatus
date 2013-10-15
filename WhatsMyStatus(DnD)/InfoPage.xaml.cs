@@ -21,22 +21,14 @@ namespace WhatsMyStatus_DnD_
         public InfoPage()
         {
             InitializeComponent();
-
-            // Set the data context of the listbox control to the sample data
-            DataContext = App.ViewModel;
         }
 
         // Load data for the ViewModel Items
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            if (!App.ViewModel.IsDataLoaded)
-            {
-                App.ViewModel.LoadData();
-            }
-
             var characterId = NavigationContext.QueryString.ContainsKey("id") ?  int.Parse(NavigationContext.QueryString["id"]) : 0;
-
+            
             CurrentCharacter = WmsFakeDb.Database.Characters.FirstOrDefault(x => x.Dbseqnum == characterId);
             if (CurrentCharacter != null)
             {
@@ -49,6 +41,14 @@ namespace WhatsMyStatus_DnD_
                 tempHpCvs.Filter += (sender, args) => args.Accepted = ((WmsCombat)args.Item).ChangeReason == HpChangeReasons.TempHp && ((WmsCombat)args.Item).Character.Dbseqnum == CurrentCharacter.Dbseqnum;
 
                 statusListSelector.ItemsSource = WmsFakeDb.Database.Statuses;
+                if (!PhoneApplicationService.Current.State.ContainsKey("Character"))
+                {
+                    PhoneApplicationService.Current.State.Add("Character", CurrentCharacter);
+                }
+                else
+                {
+                    PhoneApplicationService.Current.State["Character"] = CurrentCharacter;
+                }
 
                 normalCombat.DataContext = normalHpCvs;
                 tempCombat.DataContext = tempHpCvs;
@@ -126,6 +126,21 @@ namespace WhatsMyStatus_DnD_
             {
                 ShowPopup(HpChangeReasons.Damage);
             }
+        }
+
+        private void btn_FullReset_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_RoundOver_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_SpendSurge_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
     }
