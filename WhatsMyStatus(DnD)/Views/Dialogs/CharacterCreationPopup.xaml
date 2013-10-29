@@ -3,11 +3,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+             mc:Ignorable="d"
+    xmlns:local="clr-namespace:WhatsMyStatus_DnD_"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    d:DesignHeight="500" d:DesignWidth="300">
+    d:DesignHeight="600" d:DesignWidth="300">
     
     <StackPanel DataContext="{Binding Character}" Width="300" x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}">
         <TextBlock Margin="10,0" Text="Lets create a character!"/>
@@ -19,6 +21,13 @@
         <TextBox Name="tbLevel" InputScope="Number" Text="{Binding Level, Mode=TwoWay}"/>
         <TextBlock Margin="10,0" Text="Max Hp" />
         <TextBox Name="tbMaxHp" InputScope="Number" Text="{Binding MaxHp, Mode=TwoWay}"/>
+        <TextBlock Margin="10,0" Name="tbGameSystem" Text="Game System"></TextBlock>
+        <toolkit:ListPicker Name="ccGameSystem"  
+                            ItemsSource="{Binding GameSystemses}" 
+                            SelectedItem="{Binding GameSystem}"
+                            FullModeItemTemplate="{StaticResource enumListPicker}"
+                            ItemTemplate="{StaticResource enumListPicker}"></toolkit:ListPicker>
+            
         <Button Name="okButton"  Content="Done"></Button>
-    </StackPanel>
+         </StackPanel>
 </UserControl>

@@ -76,6 +76,7 @@ namespace WhatsMyStatus_DnD_.Views
             if (charStatus != null)
             {
                 statusRoundView.DataContext = charStatus;
+                cb_ActiveStatus.IsChecked = true;
             }
         }
     }

@@ -40,7 +40,7 @@ namespace WhatsMyStatus_DnD_.Views
             Popup popup = new Popup();
 
             var control = new CharacterCreationPopup();
-            control.Character = (WmsCharacter) lb.SelectedItem;
+            control.Character = ((MenuItem) sender).DataContext as WmsCharacter;
             control.BindControls();
             popup.VerticalOffset = 100;
             popup.HorizontalOffset = 70;

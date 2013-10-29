@@ -1,4 +1,5 @@
-﻿<phone:PhoneApplicationPage
+﻿   
+    <phone:PhoneApplicationPage
     x:Class="WhatsMyStatus_DnD_.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -12,39 +13,68 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
-    shell:SystemTray.IsVisible="True">
-    
-    
-   
+    shell:SystemTray.IsVisible="True"
+     >
 
-    <!--LayoutRoot is the root grid where all page content is placed-->
+
+        <!--LayoutRoot is the root grid where all page content is placed-->
+    
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Style="{StaticResource PhoneTextNormalStyle}">
-            	<Run Text="What's my Status?"/>
-            </TextBlock>
+        
+        <phone:Panorama>
+            <phone:PanoramaItem>
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Characters" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-                <Button Grid.Column="1" Content="New" Click="AddCharacterClick"></Button>
-            </Grid>
-        </StackPanel>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-        <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <StackPanel Margin="0, -6, 0, 12" >
-                <views:CharacterView x:Name="CharacterViewOnPage" Padding="0,10"></views:CharacterView>
-            </StackPanel>
-        </Grid>
+                <!--TitlePanel contains the name of the application and page title-->
+                <StackPanel Grid.Row="0" Margin="12,17,0,28">
+                    <TextBlock Style="{StaticResource PhoneTextNormalStyle}">
+            	<Run Text="What's my Status?"/>
+                    </TextBlock>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Characters" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+                        <Button Grid.Column="1" Content="+" Click="AddCharacterClick"></Button>
+                    </Grid>
+                </StackPanel>
+
+                <!--ContentPanel - place additional content here-->
+                <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+                    <StackPanel Margin="0, -6, 0, 12" >
+                        <views:CharacterView x:Name="CharacterViewOnPage" Margin="2,0,2,0" Padding="0,10"></views:CharacterView>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            </phone:PanoramaItem>
+            <phone:PanoramaItem>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!--TitlePanel contains the name of the application and page title-->
+                    <StackPanel Grid.Row="0" Margin="12,17,0,28">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Status Setup" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+                        </Grid>
+                    </StackPanel>
+
+                  </Grid>
+            </phone:PanoramaItem>
+
+        </phone:Panorama>
+       
     </Grid>
 
 </phone:PhoneApplicationPage>

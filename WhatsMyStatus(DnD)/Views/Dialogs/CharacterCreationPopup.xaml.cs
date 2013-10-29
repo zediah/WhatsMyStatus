@@ -15,6 +15,11 @@ namespace WhatsMyStatus_DnD_.Views.Dialogs
     {
         public WmsCharacter Character { get; set; }
 
+        public IEnumerable<E_GameSystems> GameSystemses
+        {
+            get { return Enum.GetValues(typeof (E_GameSystems)).Cast<E_GameSystems>(); }
+        }
+
         public CharacterCreationPopup()
         {
             InitializeComponent();
@@ -40,6 +45,7 @@ namespace WhatsMyStatus_DnD_.Views.Dialogs
                 tbLevel.DataContext = Character;
                 tbMaxHp.DataContext = Character;
                 tbName.DataContext = Character;
+                ccGameSystem.ItemsSource = GameSystemses;
             }
         }
 

@@ -21,6 +21,13 @@
         <local:LocalizedStrings xmlns:local="clr-namespace:WhatsMyStatus_DnD_" x:Key="LocalizedStrings"/>
         <converter:HpColourConverter x:Key="HpColourConverter"/>
         <converter:VisibilityConverter x:Key="VisibilityConverter"/>
+        <converter:EnumToStringConverter x:Key="EnumToStringConverter"/>
+
+        <DataTemplate x:Name="enumListPicker">
+            <StackPanel>
+                <TextBlock Text="{Binding Converter={StaticResource EnumToStringConverter}}"></TextBlock>
+            </StackPanel>
+        </DataTemplate>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>
@@ -28,6 +35,5 @@
         <shell:PhoneApplicationService 
             Launching="Application_Launching" Closing="Application_Closing" 
             Activated="Application_Activated" Deactivated="Application_Deactivated"/>
-    </Application.ApplicationLifetimeObjects>
-    
+    </Application.ApplicationLifetimeObjects>   
 </Application>

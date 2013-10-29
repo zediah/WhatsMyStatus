@@ -93,6 +93,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\EnumToStringConverter.cs" />
     <Compile Include="Converters\HpColourConverter.cs" />
     <Compile Include="Converters\VisibilityConverter.cs" />
     <Compile Include="LocalizedStrings.cs" />
@@ -131,6 +132,9 @@
     <Compile Include="Views\StatusRoundsView.xaml.cs">
       <DependentUpon>StatusRoundsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\StatusSetupView.xaml.cs">
+      <DependentUpon>StatusSetupView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\StatusView.xaml.cs">
       <DependentUpon>StatusView.xaml</DependentUpon>
     </Compile>
@@ -165,6 +169,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\StatusRoundsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StatusSetupView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

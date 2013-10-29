@@ -50,6 +50,22 @@ namespace WhatsMyStatus_DnD_.ViewModels
             }
         }
 
+        // Should make this a reference to an object at some point
+        private E_GameSystems _gameSystem;
+
+        public E_GameSystems GameSystem
+        {
+            get { return _gameSystem; }
+            set
+            {
+                if (_gameSystem != value)
+                {
+                    _gameSystem = value;
+                    OnPropertyChanged("GameSystem");
+                }
+            }
+        }
+
         private int _level;
         
         /// <summary>
@@ -219,5 +235,13 @@ namespace WhatsMyStatus_DnD_.ViewModels
                 Combats.Add(wmsCombat);
             }
         }
+    }
+
+    public enum E_GameSystems
+    {
+        [Description("None")]
+        None = 0,
+        [Description("DnD 4th Edition")]
+        DNDFourth = 1
     }
 }
