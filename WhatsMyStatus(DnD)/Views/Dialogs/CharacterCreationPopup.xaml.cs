@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Windows;
@@ -15,9 +16,9 @@ namespace WhatsMyStatus_DnD_.Views.Dialogs
     {
         public WmsCharacter Character { get; set; }
 
-        public IEnumerable<E_GameSystems> GameSystemses
+        public ObservableCollection<E_GameSystems> GameSystemses
         {
-            get { return Enum.GetValues(typeof (E_GameSystems)).Cast<E_GameSystems>(); }
+            get { return new ObservableCollection<E_GameSystems>(Enum.GetValues(typeof (E_GameSystems)).Cast<E_GameSystems>()); }
         }
 
         public CharacterCreationPopup()
@@ -41,11 +42,11 @@ namespace WhatsMyStatus_DnD_.Views.Dialogs
         {
             if (Character != null)
             {
-                tbClass.DataContext = Character;
-                tbLevel.DataContext = Character;
-                tbMaxHp.DataContext = Character;
-                tbName.DataContext = Character;
-                ccGameSystem.ItemsSource = GameSystemses;
+                //tbClass.DataContext = Character;
+                //tbLevel.DataContext = Character;
+                //tbMaxHp.DataContext = Character;
+                //tbName.DataContext = Character;
+                //ccGameSystem.ItemsSource = GameSystemses;
             }
         }
 
