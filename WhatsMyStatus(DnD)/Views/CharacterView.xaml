@@ -16,38 +16,45 @@
     d:DesignHeight="480" d:DesignWidth="480">
 
     <ListBox ItemsSource="{Binding}"  Hold="lb_Hold" Name="lb" HorizontalContentAlignment="Stretch" Tap="lb_Tap">
-                <ListBox.ItemTemplate >
-                <DataTemplate>
-                <Border BorderBrush="Red" BorderThickness="1">
-                    <toolkit:ContextMenuService.ContextMenu>
-                    <toolkit:ContextMenu>
-                        <toolkit:MenuItem Name="miEdit" Header="Edit"  Click="miEdit_Click"></toolkit:MenuItem>
-                        <toolkit:MenuItem Name="miRemove" Header="Remove" Click="miRemove_Click"></toolkit:MenuItem>
-                    </toolkit:ContextMenu>
-                    </toolkit:ContextMenuService.ContextMenu>
-                    <Grid Width="440">
-                        <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock x:Name="Name" Grid.Column="0" Text="{Binding Name, Mode=OneWay}" VerticalAlignment="Center" FontSize="32" FontWeight="Bold" />
+        <ListBox.ItemContainerStyle>
+            <Style TargetType="ListBoxItem">
+                <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+                <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                <Setter Property="Margin" Value="0,4,0,4"></Setter>
+            </Style>
+        </ListBox.ItemContainerStyle>
+        <ListBox.ItemTemplate >
+            <DataTemplate>
+            <Border BorderBrush="Red" BorderThickness="1">
+                <toolkit:ContextMenuService.ContextMenu>
+                <toolkit:ContextMenu>
+                    <toolkit:MenuItem Name="miEdit" Header="Edit"  Click="miEdit_Click"></toolkit:MenuItem>
+                    <toolkit:MenuItem Name="miRemove" Header="Remove" Click="miRemove_Click"></toolkit:MenuItem>
+                </toolkit:ContextMenu>
+                </toolkit:ContextMenuService.ContextMenu>
+                <Grid Margin="5,0,5,0">
+                    <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock x:Name="Name" Grid.Column="0" Text="{Binding Name, Mode=OneWay}" VerticalAlignment="Center" FontSize="32" FontWeight="Bold" />
 
-                                <Grid Grid.Column="1" HorizontalAlignment="Stretch">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                    </Grid.RowDefinitions>
-                                    <TextBlock x:Name="Class" Grid.Row="0" Text="{Binding CharacterClass, Mode=OneWay}" TextAlignment="Right" HorizontalAlignment="Stretch"/>
+                            <Grid Grid.Column="1" HorizontalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <TextBlock x:Name="Class" Grid.Row="0" Text="{Binding CharacterClass, Mode=OneWay}" TextAlignment="Right" HorizontalAlignment="Stretch"/>
                             <TextBlock  TextAlignment="Right" Grid.Row="1" Text="Lvl: ">
-                                <Run x:Name="Level" Text="{Binding Level, Mode=OneWay}"/>
-                            </TextBlock>
-                        </Grid>
-                </Grid>
-                    </Border>
-            </DataTemplate>
+                            <Run x:Name="Level" Text="{Binding Level, Mode=OneWay}"/>
+                        </TextBlock>
+                    </Grid>
+            </Grid>
+                </Border>
+        </DataTemplate>
                 </ListBox.ItemTemplate>
         </ListBox>
 </UserControl>

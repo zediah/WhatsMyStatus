@@ -37,19 +37,5 @@ namespace WhatsMyStatus_DnD_.Views.Dialogs
                    !string.IsNullOrWhiteSpace(tbMaxHp.Text) &&
                    !string.IsNullOrWhiteSpace(tbName.Text);
         }
-
-        public void BindControls()
-        {
-            if (Character != null)
-            {
-                //tbClass.DataContext = Character;
-                //tbLevel.DataContext = Character;
-                //tbMaxHp.DataContext = Character;
-                //tbName.DataContext = Character;
-                //ccGameSystem.ItemsSource = GameSystemses;
-            }
-        }
-
-
     }
 }

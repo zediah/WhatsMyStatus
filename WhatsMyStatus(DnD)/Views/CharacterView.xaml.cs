@@ -41,7 +41,6 @@ namespace WhatsMyStatus_DnD_.Views
 
             var control = new CharacterCreationPopup();
             control.Character = ((MenuItem) sender).DataContext as WmsCharacter;
-            control.BindControls();
             popup.VerticalOffset = 100;
             popup.HorizontalOffset = 70;
 

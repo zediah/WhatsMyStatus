@@ -30,7 +30,7 @@
                 </Grid.RowDefinitions>
 
                 <!--TitlePanel contains the name of the application and page title-->
-                <StackPanel Grid.Row="0" Margin="12,17,0,28">
+                <StackPanel Grid.Row="0" Margin="12,5,0,10">
                     <TextBlock Style="{StaticResource PhoneTextNormalStyle}">
             	<Run Text="What's my Status?"/>
                     </TextBlock>
@@ -46,8 +46,8 @@
 
                 <!--ContentPanel - place additional content here-->
                 <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-                    <StackPanel Margin="0, -6, 0, 12" >
-                        <views:CharacterView x:Name="CharacterViewOnPage" Margin="2,0,2,0" Padding="0,10"></views:CharacterView>
+                    <StackPanel  Margin="0, -6, 0, 12" >
+                        <views:CharacterView x:Name="CharacterViewOnPage"></views:CharacterView>
                     </StackPanel>
                 </Grid>
             </Grid>
@@ -56,19 +56,29 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
 
                     <!--TitlePanel contains the name of the application and page title-->
-                    <StackPanel Grid.Row="0" Margin="12,17,0,28">
+                    <StackPanel Grid.Row="0" Margin="12,5,0,5">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="Status Setup" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+                            <TextBlock Text="Status Setup" FontSize="62" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+                            <Button Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Content="+" Click="AddStatusClick"></Button>
                         </Grid>
                     </StackPanel>
+                     <views:StatusSetupView DataContext="{Binding ElementName=CondensedStatusSelector, Path=SelectedItem}" Margin="0,0,0,5" Grid.Row="1" x:Name="StatusSetup"></views:StatusSetupView>
+                    <phone:LongListSelector x:Name="CondensedStatusSelector" ItemsSource="{Binding}" Grid.Row="2">
+                        <phone:LongListSelector.ItemTemplate>
+                            <DataTemplate>
+                                <views:StatusSetupViewCondensed x:Name="StatusSetupCondensed"></views:StatusSetupViewCondensed>
+                            </DataTemplate>
+                        </phone:LongListSelector.ItemTemplate>
+                    </phone:LongListSelector>
 
                   </Grid>
             </phone:PanoramaItem>

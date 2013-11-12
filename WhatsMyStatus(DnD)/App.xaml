@@ -22,6 +22,7 @@
         <converter:HpColourConverter x:Key="HpColourConverter"/>
         <converter:VisibilityConverter x:Key="VisibilityConverter"/>
         <converter:EnumToStringConverter x:Key="EnumToStringConverter"/>
+        <converter:BoolToStringConverter x:Key="BoolToStringConverter"/>
 
         <DataTemplate x:Name="enumListPicker">
             <StackPanel>

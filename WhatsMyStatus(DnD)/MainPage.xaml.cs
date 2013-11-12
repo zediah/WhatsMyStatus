@@ -5,6 +5,7 @@ using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Media;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
@@ -30,6 +31,7 @@ namespace WhatsMyStatus_DnD_
             }
 
             CharacterViewOnPage.DataContext = WmsFakeDb.Database.Characters;
+            CondensedStatusSelector.DataContext = WmsFakeDb.Database.Statuses;
         }
 
         private void AddCharacterClick(object sender, RoutedEventArgs e)
@@ -39,7 +41,6 @@ namespace WhatsMyStatus_DnD_
             var control = new CharacterCreationPopup();
             var newChar = new WmsCharacter();
             control.Character = newChar;
-            control.BindControls();
             popup.VerticalOffset = 100;
             popup.HorizontalOffset = 70;
 
@@ -61,6 +62,22 @@ namespace WhatsMyStatus_DnD_
             popup.Child = control;
             popup.IsOpen = true;
             control.tbName.Focus();
+        }
+
+        private void AddStatusClick(object sender, RoutedEventArgs e)
+        {
+            // Create a new one, it's an observable collection - should be automatically seen in the setup...
+            WmsFakeDb.Database.Add(new WmsStatus() {Name = "No Name"});
+        }
+
+        private void CondensedStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //CondensedStatusSelector.
+            //var item = e.AddedItems.Cast<ListBoxItem>().FirstOrDefault();
+            //item.Background = new SolidColorBrush(Colors.Gray);
+
+            //var removedItem = e.RemovedItems.Cast<ListBoxItem>().FirstOrDefault();
+            //removedItem.Background = new SolidColorBrush(Colors.LightGray);
         }
     }
 }

@@ -62,6 +62,24 @@ namespace WhatsMyStatus_DnD_.ViewModels
             }}
         }
 
+        /// <summary>
+        /// The game system this status is applicable too
+        /// </summary>
+        private E_GameSystems _gameSystem;
+
+        public E_GameSystems GameSystem
+        {
+            get { return _gameSystem; }
+            set
+            {
+                if (_gameSystem != value)
+                {
+                    _gameSystem = value;
+                    NotifyPropertyChanged("GameSystem");
+                }
+            }
+        }
+
 
 
         public event PropertyChangedEventHandler PropertyChanged;
