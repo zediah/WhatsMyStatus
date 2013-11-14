@@ -42,11 +42,12 @@ namespace WhatsMyStatus_DnD_.ViewModels
 
         private Dictionary<Type, IList> CachedTypes { get; set; }
         
-        public IList<T> GetRelatedTable<T>()  where T : WmsPrimaryObject
+        public IList<T> GetRelatedTable<T>(Func<T, bool> selectorFunc = null)  where T : WmsPrimaryObject
         {
             try
             {
-                return GetRelatedTable(typeof (T)).Cast<T>().ToList();
+                var results = GetRelatedTable(typeof (T)).Cast<T>();
+                return selectorFunc == null ? results.ToList() : results.Where(selectorFunc).ToList();
             }
             catch (Exception ex)
             {

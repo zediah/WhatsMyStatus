@@ -103,19 +103,16 @@ namespace WhatsMyStatus_DnD_.ViewModels.Core
             }
         }
 
-        //public static bool operator ==(WmsPrimaryObject x, WmsPrimaryObject y)
-        //{
-        //    if ((object)x == null)
-        //        return false;
-        //    return x.Equals(y);
-        //}
-
-        //public static bool operator !=(WmsPrimaryObject x, WmsPrimaryObject y)
-        //{
-        //    if ((object)x == null)
-        //        return false;
-        //    return !x.Equals(y);
-        //}
+        public override bool Equals(object obj)
+        {
+            // If we have a lower than zero dbseqnum = we can't be the same because we're new and un-added
+            // We also have to make sure they're the same object class...
+            if (obj == null || this.Dbseqnum <= 0 || obj.GetType() != this.GetType())
+                return false;
+            else
+                // Basically a primary key comparison
+                return ((WmsPrimaryObject)obj).Dbseqnum == this.Dbseqnum;
+        }
 
         public bool Equals(WmsPrimaryObject other)
         {
@@ -127,6 +124,53 @@ namespace WhatsMyStatus_DnD_.ViewModels.Core
                 // Basically a primary key comparison
                 return other.Dbseqnum == this.Dbseqnum;
         }
+
+        /// <summary>
+        /// Make it do a primary key comparison if the reference comparison fails.
+        /// </summary>
+        /// <param name="o1"></param>
+        /// <param name="o2"></param>
+        /// <returns></returns>
+        public static bool operator ==(WmsPrimaryObject o1, WmsPrimaryObject o2)
+        {
+            if (ReferenceEquals(o1,o2))
+            {
+                return true;
+            }
+
+            if ((object)o1 == null || (object)o2 == null)
+            {
+                return false;
+            }
+
+            if (o1.GetType() != o2.GetType())
+            {
+                return false;
+            }
+
+            return o1.dbseqnum == o2.dbseqnum;
+        }
+
+        /// <summary>
+        /// Make it do a primary key comparison if the reference comparison fails
+        /// </summary>
+        /// <param name="o1"></param>
+        /// <param name="o2"></param>
+        /// <returns></returns>
+        public static bool operator !=(WmsPrimaryObject o1, WmsPrimaryObject o2)
+        {
+            if (ReferenceEquals(o1, o2))
+            {
+                return false;
+            }
+            if ((object)o1 == null || (object)o2 == null)
+            {
+                return true;
+            }
+
+            return o1.dbseqnum != o2.dbseqnum;
+        }
+        
 
         public override string ToString()
         {

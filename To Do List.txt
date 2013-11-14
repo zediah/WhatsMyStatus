@@ -1,0 +1,15 @@
+Whats My Status To Do:
+Add Defaults for game systems
+Make "Full Reset" button work
+Make "Round Over" button work
+Add "Spend Surge" and "Spend Surge (+ Bonus)" buttons
+Add "About" page
+Add damage per round
+Add "Last Until Save" check to status
+	- This includes adding something to the status to indicate this
+Add conditions? e.g. < 50% max hp for bloodied
+Order the status list of those checked first
+Add a filter for status's area?
+Make the status setup slightly smaller
+Make the status's filter based on game system of character
+Make it noticeable that one status is selected

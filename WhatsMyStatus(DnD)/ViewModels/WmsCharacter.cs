@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using WhatsMyStatus_DnD_.ViewModels.Core;
 
 namespace WhatsMyStatus_DnD_.ViewModels
@@ -98,6 +99,24 @@ namespace WhatsMyStatus_DnD_.ViewModels
                 {
                     _maxHp = value;
                     OnPropertyChanged("MaxHp");
+                }
+            }
+        }
+
+        private int _surges;
+
+        /// <summary>
+        /// The number of surges this character has...very 4e idea though, should split this out later
+        /// </summary>
+        public int Surges
+        {
+            get { return _surges; }
+            set
+            {
+                if(_surges != value)
+                {
+                    _surges = value;
+                    OnPropertyChanged("Surges");
                 }
             }
         }
@@ -234,6 +253,61 @@ namespace WhatsMyStatus_DnD_.ViewModels
             {
                 Combats.Add(wmsCombat);
             }
+        }
+
+        /// <summary>
+        /// Spends a single surge if the character has one available to heal
+        /// </summary>
+        /// <param name="bonus">The bonus given while spending a surge, optional</param>
+        public void SpendSurge(int bonus = 0)
+        {
+            if (Surges > 0)
+            {
+                Surges--;
+                // Round down based on 1/4 of max hp of character. This is the rule.
+                AddCombat(HpChangeReasons.Heal, (int)Math.Floor((decimal)(MaxHp / 4)) + bonus);
+            }
+            else
+            {
+                MessageBox.Show("Unable to spend a surge.\nYou have none you silly duffa!","Surge Unsuccesful", MessageBoxButton.OK);
+            }
+        }
+
+        /// <summary>
+        /// Remove a single surge from the character. Cannot go below 0.
+        /// </summary>
+        public void RemoveSurge()
+        {
+            if (Surges > 0)
+            {
+                Surges--;
+            }
+        }
+
+        /// <summary>
+        /// Gets a list of status's that currently afflict this character
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<WmsCharacterStatus> GetAfflictedStatuses()
+        {
+            return WmsFakeDb.Database.GetRelatedTable<WmsCharacterStatus>(x => x.Character == this);
+        }
+
+        /// <summary>
+        /// Gets all the combat records for this character
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<WmsCombat> GetCombats()
+        {
+            return WmsFakeDb.Database.GetRelatedTable<WmsCombat>(x => x.Character == this);
+        }
+
+        /// <summary>
+        /// Add a single surge to the character
+        /// </summary>
+        public void AddSurge()
+        {
+            Surges++;
         }
     }
 

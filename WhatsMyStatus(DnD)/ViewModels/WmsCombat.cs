@@ -107,6 +107,7 @@ namespace WhatsMyStatus_DnD_.ViewModels
     {
         Damage = 1,
         Heal = 2,
-        TempHp = 3
+        TempHp = 3,
+        BonusHeal = 4
     }
 }

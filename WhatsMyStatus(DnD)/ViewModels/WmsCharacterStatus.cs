@@ -91,5 +91,21 @@ namespace WhatsMyStatus_DnD_.ViewModels
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+        /// <summary>
+        /// Reduces the amount of rounds remaining by 1 to a minimum of 0
+        /// </summary>
+        public void ReduceRoundsRemaining()
+        {
+            if (RoundsRemaining > 0)
+            {
+                RoundsRemaining--;
+            }
+            else
+            {
+                // There are no rounds remaining - so de select it
+                WmsFakeDb.Database.Remove(this);
+            }
+        }
     }
 }

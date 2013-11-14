@@ -1,4 +1,5 @@
 ﻿<phone:PhoneApplicationPage
+    x:Name="this"
     x:Class="WhatsMyStatus_DnD_.InfoPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -88,7 +89,7 @@
                     </phone:LongListSelector.ListHeaderTemplate>
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
-                            <views:StatusView Margin="0, 5,0,5" x:Name="StatusViews"></views:StatusView>
+                            <views:StatusView Margin="0, 5,0,5"  x:Name="StatusViews"></views:StatusView>
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>
                 </phone:LongListSelector>
@@ -106,9 +107,17 @@
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <TextBlock  VerticalAlignment="Center" TextAlignment="Center" Text="Surges"></TextBlock>
-                        <TextBox Grid.Column="1" Name="txt_Surges"></TextBox>
-                        <Button Grid.Column="2" Name="btn_AddSurge" Content="+" Click="btn_SpendSurge_Click"></Button>
-                        <Button Grid.Column="3" Name="btn_RemoveSurge" Content="-"></Button>
+                        <TextBox Grid.Column="1" Name="txt_Surges" InputScope="Number" Text="{Binding ElementName=this, Path=CurrentCharacter.Surges, Mode=TwoWay}"></TextBox>
+                        <Button Grid.Column="2" Name="btn_AddSurge" Content="+" Click="btn_AddSurge_Click"></Button>
+                        <Button Grid.Column="3" Name="btn_RemoveSurge" Content="-" Click="btn_RemoveSurge_Click"></Button>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Name="btn_spendSurge" HorizontalContentAlignment="Center" Content="Spend&#x0a;Surge"  Click="btn_spendSurge_Click_1"></Button>
+                        <Button Grid.Column="1" Name="btn_spendSurgePlusBonus"  HorizontalContentAlignment="Center" Content="Spend Surge&#x0a;  + Bonus" Click="btn_spendSurgePlusBonus_Click"></Button>
                     </Grid>
                 </StackPanel>
             </phone:PanoramaItem>
