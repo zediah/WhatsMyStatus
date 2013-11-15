@@ -253,6 +253,31 @@ namespace WhatsMyStatus_DnD_.ViewModels
             {
                 Combats.Add(wmsCombat);
             }
+            else
+            {
+                var wmsCharStatus = child as WmsCharacterStatus;
+                if (wmsCharStatus != null)
+                {
+                    CharacterStatuses.Add(wmsCharStatus);
+                }
+            }
+        }
+
+        public void RemoveChildRecord<T>(T child) where T: WmsPrimaryObject
+        {
+            var wmsCharacterStatus = child as WmsCharacterStatus;
+            if (wmsCharacterStatus != null)
+            {
+                CharacterStatuses.Remove(wmsCharacterStatus);
+            }
+            else
+            {
+                var wmsCombat = child as WmsCombat;
+                if (wmsCombat != null)
+                {
+                    Combats.Remove(wmsCombat);
+                }
+            }
         }
 
         /// <summary>
@@ -308,6 +333,54 @@ namespace WhatsMyStatus_DnD_.ViewModels
         public void AddSurge()
         {
             Surges++;
+        }
+
+        /// <summary>
+        /// Create all the character status's applicable for this character.
+        /// </summary>
+        public void CreateCharacterStatuses()
+        {
+            // ***********************************************
+            // 			 Method Logic
+            // ***********************************************
+            try
+            {
+                //var currentStatus = WmsFakeDb.Database.Statuses.ToList();
+                //foreach (var status in currentStatus)
+                //{
+                //    status.Remove();
+                //    status.Dbseqnum = 0;
+                //}
+
+                //foreach(var curstat in currentStatus)
+                //{
+                //    WmsFakeDb.Database.Add(curstat);
+                //}
+               
+
+                var currentStatuses = CharacterStatuses.Select(x => x.Status).ToList();
+                var applicableStatuses = WmsFakeDb.Database.Statuses.Where(x => x.GameSystem == this.GameSystem).ToList();
+                foreach(var status in applicableStatuses.Except(currentStatuses))
+                {
+                    WmsCharacterStatus newStatus = new WmsCharacterStatus();
+                    newStatus.Status = status;
+                    newStatus.Character = this;
+
+                    WmsFakeDb.Database.Add(newStatus);
+                }
+
+                var toBeDeleted = currentStatuses.Except(applicableStatuses);
+                foreach(var status in CharacterStatuses.Where(x => toBeDeleted.Contains( x.Status)))
+                {
+                    WmsFakeDb.Database.Remove(status);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+      
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Net;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,10 @@ namespace WhatsMyStatus_DnD_
             InitializeComponent();
         }
 
-        // Load data for the ViewModel Items
+        /// <summary>
+        /// Lets load the data when we're entering this section for each character
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
@@ -34,14 +38,17 @@ namespace WhatsMyStatus_DnD_
             if (CurrentCharacter != null)
             {
                 var normalHpCvs = new CollectionViewSource();
-                normalHpCvs.Source = WmsFakeDb.Database.Combats;
-                normalHpCvs.Filter += (sender, args) => args.Accepted = ((WmsCombat)args.Item).ChangeReason != HpChangeReasons.TempHp && ((WmsCombat)args.Item).Character.Dbseqnum == CurrentCharacter.Dbseqnum;
+                normalHpCvs.Source = CurrentCharacter.Combats;
+                normalHpCvs.Filter += (sender, args) => args.Accepted = ((WmsCombat)args.Item).ChangeReason != HpChangeReasons.TempHp && ((WmsCombat)args.Item).Character == CurrentCharacter;
 
                 var tempHpCvs = new CollectionViewSource();
-                tempHpCvs.Source = WmsFakeDb.Database.Combats;
-                tempHpCvs.Filter += (sender, args) => args.Accepted = ((WmsCombat)args.Item).ChangeReason == HpChangeReasons.TempHp && ((WmsCombat)args.Item).Character.Dbseqnum == CurrentCharacter.Dbseqnum;
+                tempHpCvs.Source = CurrentCharacter.Combats;
+                tempHpCvs.Filter += (sender, args) => args.Accepted = ((WmsCombat)args.Item).ChangeReason == HpChangeReasons.TempHp && ((WmsCombat)args.Item).Character == CurrentCharacter;
 
-
+                var statusCvs = new CollectionViewSource();
+                statusCvs.Source = CurrentCharacter.CharacterStatuses;
+                statusCvs.SortDescriptions.Add(new SortDescription("IsApplicable", ListSortDirection.Descending));
+                CurrentCharacter.CreateCharacterStatuses();
                 
                 if (!PhoneApplicationService.Current.State.ContainsKey("Character"))
                 {
@@ -54,19 +61,14 @@ namespace WhatsMyStatus_DnD_
 
                 normalCombat.DataContext = normalHpCvs;
                 tempCombat.DataContext = tempHpCvs;
-                UpdateStatusItemSource();
+                listB.DataContext = statusCvs;
             }
             UpdateHpTotals();
         }
 
-        private void UpdateStatusItemSource()
-        {
-            var afflicted = CurrentCharacter.GetAfflictedStatuses().Select(x => x.Status).ToList();
-            var orderedList = WmsFakeDb.Database.Statuses.Where(x => x.GameSystem == CurrentCharacter.GameSystem)
-                                                         .OrderByDescending(x => afflicted.Contains(x) ? 1 : 0).ToList();
-            statusListSelector.ItemsSource = orderedList;
-        }
-
+        /// <summary>
+        /// Visually update the hp total headers
+        /// </summary>
         private void UpdateHpTotals()
         {
             if (CurrentCharacter != null)
@@ -77,16 +79,25 @@ namespace WhatsMyStatus_DnD_
             }
         }
 
+        /// <summary>
+        /// Heal is clicked, show the popup and heal!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnHeal_Click(object sender, RoutedEventArgs e)
         {
            if (CurrentCharacter != null)
            {
-               ShowPopup(HpChangeReasons.Heal);
+               ShowCombatPopup(HpChangeReasons.Heal);
            }
         }
 
-        private void ShowPopup(HpChangeReasons reason)
-        {
+        /// <summary>
+        /// Show a popup based on the reason given, combat will be created from this
+        /// </summary>
+        /// <param name="reason"></param>
+        private void ShowCombatPopup(HpChangeReasons reason)
+        { 
             Popup popup = new Popup();
 
             var control = new HealthChangePopup();
@@ -126,7 +137,7 @@ namespace WhatsMyStatus_DnD_
         {
             if (CurrentCharacter != null)
             {
-                ShowPopup(HpChangeReasons.TempHp);
+                ShowCombatPopup(HpChangeReasons.TempHp);
             }
 
         }
@@ -135,7 +146,7 @@ namespace WhatsMyStatus_DnD_
         {
             if (CurrentCharacter != null)
             {
-                ShowPopup(HpChangeReasons.Damage);
+                ShowCombatPopup(HpChangeReasons.Damage);
             }
         }
 
@@ -153,7 +164,6 @@ namespace WhatsMyStatus_DnD_
                     {
                         WmsFakeDb.Database.Remove(combat);
                     }
-                    UpdateStatusItemSource();
                     CurrentCharacter.Surges = 0;
                 }
             }

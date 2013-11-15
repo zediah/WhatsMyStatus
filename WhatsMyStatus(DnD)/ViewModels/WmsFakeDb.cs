@@ -106,6 +106,10 @@ namespace WhatsMyStatus_DnD_.ViewModels
         {
             try
             {
+                if (removeObj is IChildRelation)
+                {
+                    
+                }
                 if (CachedTypes.ContainsKey(removeObj.GetType()) && 
                     CachedTypes[removeObj.GetType()].Contains(removeObj))
                 {
@@ -141,10 +145,6 @@ namespace WhatsMyStatus_DnD_.ViewModels
             LoadFromIsolatedStorage<WmsCharacterStatus>();
             LoadFromIsolatedStorage<WmsStatus>();
             LoadFromIsolatedStorage<WmsCombat>();
-            foreach(var value in Statuses.Take(10))
-            {
-                value.RoundsRequired = true;
-            }
         }
 
         private void LoadFromIsolatedStorage<T>() where T: WmsPrimaryObject

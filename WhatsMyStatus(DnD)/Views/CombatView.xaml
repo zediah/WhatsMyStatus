@@ -15,7 +15,9 @@
         <ListBox ItemsSource="{Binding}" HorizontalAlignment="Center">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock x:Name="HpChange" Text="{Binding ChangeInHp, Mode=OneWay}" Foreground="{Binding ChangeInHp, Converter={StaticResource HpColourConverter}}" HorizontalAlignment="Center"></TextBlock>
+                    <TextBlock x:Name="HpChange" Text="{Binding ChangeInHp, Mode=OneWay}" 
+                               Foreground="{Binding ChangeInHp, Converter={StaticResource HpColourConverter}}" 
+                               HorizontalAlignment="Center"></TextBlock>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

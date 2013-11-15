@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ using WhatsMyStatus_DnD_.ViewModels.Core;
 
 namespace WhatsMyStatus_DnD_.ViewModels
 {
-    public class WmsCharacterStatus : WmsPrimaryObject, INotifyPropertyChanged
+    public class WmsCharacterStatus : WmsPrimaryObject, INotifyPropertyChanged, IChildRelation
     {
 
         private int _roundsRemaining;
@@ -65,20 +66,28 @@ namespace WhatsMyStatus_DnD_.ViewModels
             }
         }
 
-        private bool _showRounds;
-
         public bool ShowRounds
         {
-            get { return _showRounds; }
+            get { return Status.RoundsRequired && AfflictedWithStatus; }
+        }
+
+        private bool _afflictedWithStatus;
+
+        /// <summary>
+        ///  Whether or not the character is afflicted by this status or not
+        /// </summary>
+        public bool AfflictedWithStatus
+        {
+            get { return _afflictedWithStatus; }
             set
             {
-                if (_showRounds != value)
+                if(_afflictedWithStatus != value)
                 {
-                    _showRounds = value;
+                    _afflictedWithStatus = value;
+                    NotifyPropertyChanged("AfflictedWithStatus");
                     NotifyPropertyChanged("ShowRounds");
                 }
             }
-
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -91,6 +100,7 @@ namespace WhatsMyStatus_DnD_.ViewModels
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
 
         /// <summary>
         /// Reduces the amount of rounds remaining by 1 to a minimum of 0
@@ -105,6 +115,35 @@ namespace WhatsMyStatus_DnD_.ViewModels
             {
                 // There are no rounds remaining - so de select it
                 WmsFakeDb.Database.Remove(this);
+            }
+        }
+
+        public void AddToParent()
+        {
+            if (Status != null)
+            {
+                Status.AddChildRecord(this);
+            }
+            if (Character != null)
+            {
+                Character.AddChildRecord(this);
+            }
+        }
+
+        public T GetParent<T>() where T : WmsPrimaryObject
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveFromParent()
+        {
+            if (Status != null)
+            {
+                Status.RemoveChildRecord(this);
+            }
+            if (Character != null)
+            {
+                Character.RemoveChildRecord(this);
             }
         }
     }

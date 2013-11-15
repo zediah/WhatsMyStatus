@@ -73,7 +73,7 @@
             </phone:PanoramaItem>
 
             <phone:PanoramaItem>
-                <phone:LongListSelector Name="statusListSelector" Margin="0,-38,-22,2">
+                <!--<phone:LongListSelector Name="statusListSelector" Margin="0,-38,-22,2">
                     <phone:LongListSelector.ListHeaderTemplate>
                         <DataTemplate>
                             <Grid Margin="12,0,0,38">
@@ -92,7 +92,21 @@
                             <views:StatusView Margin="0, 5,0,5"  x:Name="StatusViews"></views:StatusView>
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>
-                </phone:LongListSelector>
+                </phone:LongListSelector>-->
+                <ListBox ItemsSource="{Binding}" Name="listB">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                            <Setter Property="Margin" Value="0,4,0,4"></Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <views:StatusView Margin="0, 5,0,5"  x:Name="StatusViews"></views:StatusView>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    </ListBox>
             </phone:PanoramaItem>
 
             <phone:PanoramaItem Header="Other Options" Orientation="Vertical">

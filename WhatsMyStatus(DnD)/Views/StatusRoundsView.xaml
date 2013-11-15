@@ -20,7 +20,7 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBlock   VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Grid.Column="0" Grid.Row="0" Text="Rounds: "></TextBlock>
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Grid.Column="0" Grid.Row="0" Text="Rounds: "></TextBlock>
                 <TextBox InputScope="Number" Name="txt_Remaining" Grid.Column="1" Grid.Row="0" Text="{Binding RoundsRemaining, Mode=TwoWay}"></TextBox>
                 <Button Name="minusRound" Grid.Column="0" Grid.Row="1" Content="-" Click="minusRound_Click"></Button>
                 <Button Name="addRound" Grid.Column="1" Grid.Row="1" Content="+" Click="addRound_Click"></Button>

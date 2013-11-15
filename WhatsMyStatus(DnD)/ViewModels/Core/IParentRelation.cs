@@ -9,5 +9,6 @@ namespace WhatsMyStatus_DnD_.ViewModels.Core
     public interface IParentRelation
     {
         void AddChildRecord<T>(T child) where T: WmsPrimaryObject;
+        void RemoveChildRecord<T>(T child) where T: WmsPrimaryObject;
     }
 }

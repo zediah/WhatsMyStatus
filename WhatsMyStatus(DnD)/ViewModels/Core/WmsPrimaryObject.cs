@@ -103,6 +103,11 @@ namespace WhatsMyStatus_DnD_.ViewModels.Core
             }
         }
 
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        } 
+
         public override bool Equals(object obj)
         {
             // If we have a lower than zero dbseqnum = we can't be the same because we're new and un-added
@@ -211,6 +216,11 @@ namespace WhatsMyStatus_DnD_.ViewModels.Core
                 MessageBox.Show(ex.ToString());
             }
             return false;
+        }
+
+        public void Remove()
+        {
+            WmsFakeDb.Database.Remove(this);
         }
     }
 }

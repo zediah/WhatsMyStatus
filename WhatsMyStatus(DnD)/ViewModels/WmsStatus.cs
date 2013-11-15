@@ -1,15 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Phone.Shell;
 using WhatsMyStatus_DnD_.ViewModels.Core;
 
 namespace WhatsMyStatus_DnD_.ViewModels
 {
-    public class WmsStatus : WmsPrimaryObject, INotifyPropertyChanged
+    public class WmsStatus : WmsPrimaryObject, INotifyPropertyChanged, IParentRelation
     {
+
+        public WmsStatus()
+        {
+            CharacterStatuses = new ObservableCollection<WmsCharacterStatus>();
+        }
+
         private string _name = "";
 
         /// <summary>
@@ -55,11 +63,13 @@ namespace WhatsMyStatus_DnD_.ViewModels
         public bool RoundsRequired
         {
             get { return _roundsRequired; }
-            set { if (_roundsRequired != value)
-            {
-                _roundsRequired = value;
-                NotifyPropertyChanged("RoundsRequired");
-            }}
+            set { 
+                if (_roundsRequired != value)
+                {
+                    _roundsRequired = value;
+                    NotifyPropertyChanged("RoundsRequired");
+                }
+            }
         }
 
         /// <summary>
@@ -80,7 +90,7 @@ namespace WhatsMyStatus_DnD_.ViewModels
             }
         }
 
-
+        public ObservableCollection<WmsCharacterStatus> CharacterStatuses { get; private set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -92,6 +102,23 @@ namespace WhatsMyStatus_DnD_.ViewModels
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        
+
+        public void AddChildRecord<T>(T child) where T : WmsPrimaryObject
+        {
+            var charStatus = child as WmsCharacterStatus;
+            if (charStatus != null)
+            {
+                CharacterStatuses.Add(charStatus);
+            }
+        }
+
+        public void RemoveChildRecord<T>(T child) where T : WmsPrimaryObject
+        {
+            var wmsCharStatus = child as WmsCharacterStatus;
+            if (wmsCharStatus != null)
+            {
+                CharacterStatuses.Remove(wmsCharStatus);
+            }
+        }
     }
 }

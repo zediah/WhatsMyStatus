@@ -10,5 +10,7 @@ namespace WhatsMyStatus_DnD_.ViewModels.Core
     {
         void AddToParent();
         T GetParent<T>() where T : WmsPrimaryObject;
+
+        void RemoveFromParent();
     }
 }

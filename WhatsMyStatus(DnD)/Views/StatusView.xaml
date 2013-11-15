@@ -12,7 +12,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="100" d:DesignWidth="480">
 
-    
+
     <Border BorderThickness="1" BorderBrush="BlanchedAlmond" Loaded="Border_Loaded">
         <Grid Name="viewGrid">
             <Grid.ColumnDefinitions>
@@ -20,9 +20,12 @@
                 <ColumnDefinition Width="2*"></ColumnDefinition>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40" Text="{Binding Name}"></TextBlock>
-            <views:StatusRoundsView Grid.Column="1" Name="statusRoundView" Visibility="{Binding ShowRounds, FallbackValue=Collapsed, Converter={StaticResource ResourceKey=VisibilityConverter}}" ></views:StatusRoundsView>
-            <CheckBox Name="cb_ActiveStatus"   HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Unchecked="cb_ActiveStatus_Checked" Checked="cb_ActiveStatus_Checked"></CheckBox>
+            <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40" Text="{Binding Status.Name}"></TextBlock>
+            <views:StatusRoundsView Grid.Column="1" Name="statusRoundView" DataContext="{Binding ElementName=this, Path=DataContext}"
+                                                Visibility="{Binding ShowRounds, FallbackValue=Collapsed, Converter={StaticResource ResourceKey=VisibilityConverter}}" ></views:StatusRoundsView>
+            <CheckBox Name="cb_ActiveStatus" IsChecked="{Binding AfflictedWithStatus, Mode=TwoWay}"  HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                  Grid.Column="2" Unchecked="cb_ActiveStatus_Checked" 
+                                  Checked="cb_ActiveStatus_Checked"></CheckBox>
         </Grid>
     </Border>
 </UserControl>

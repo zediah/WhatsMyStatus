@@ -101,6 +101,14 @@ namespace WhatsMyStatus_DnD_.ViewModels
         {
             return WmsFakeDb.Database.GetRelatedTable<T>().FirstOrDefault(x => x.Dbseqnum == Character.Dbseqnum);
         }
+
+        public void RemoveFromParent()
+        {
+            if (Character != null)
+            {
+                Character.RemoveChildRecord(this);
+            }
+        }
     }
 
     public enum HpChangeReasons
