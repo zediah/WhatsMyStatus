@@ -30,37 +30,35 @@ namespace WhatsMyStatus_DnD_.ViewModels
             }
         }
 
-        private WmsStatus _status;
+        private readonly WmsLoadObject<WmsStatus> _status = new WmsLoadObject<WmsStatus>();
 
         /// <summary>
         /// The status this is for
         /// </summary>
         public WmsStatus Status
         {
-            get { return _status; }
+            get { return _status.Load(); }
             set
             {
-                if (_status != value)
-                {
-                    _status = value;
+               if (_status.Set(value))
+               {
                     NotifyPropertyChanged("State");
-                }
+               }
             }
         }
 
-        private WmsCharacter _character;
+        private readonly WmsLoadObject<WmsCharacter> _character = new WmsLoadObject<WmsCharacter>();
 
         /// <summary>
         /// The character this is for
         /// </summary>
         public WmsCharacter Character
         {
-            get { return _character; }
+            get { return _character.Load(); }
             set
             {
-                if (_character != value)
+                if (_character.Set(value))
                 {
-                    _character = value;
                     NotifyPropertyChanged(("Character"));
                 }
             }

@@ -48,7 +48,7 @@ namespace WhatsMyStatus_DnD_
                 var statusCvs = new CollectionViewSource();
                 statusCvs.Source = CurrentCharacter.CharacterStatuses;
                 statusCvs.SortDescriptions.Add(new SortDescription("IsApplicable", ListSortDirection.Descending));
-                CurrentCharacter.CreateCharacterStatuses();
+                CurrentCharacter.CreateMissingCharacterStatuses();
                 
                 if (!PhoneApplicationService.Current.State.ContainsKey("Character"))
                 {

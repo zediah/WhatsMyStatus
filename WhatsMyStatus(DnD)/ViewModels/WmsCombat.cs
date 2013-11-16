@@ -66,19 +66,18 @@ namespace WhatsMyStatus_DnD_.ViewModels
             }
         }
 
-        private WmsCharacter _character;
+        private WmsLoadObject<WmsCharacter> _character = new WmsLoadObject<WmsCharacter>();
 
         /// <summary>
         /// The number the hp changes due to this 'combat'
         /// </summary>
         public WmsCharacter Character
         {
-            get { return _character; }
+            get { return _character.Load(); }
             set
             {
-                if (_character != value)
+                if (_character.Set(value))
                 {
-                    _character = value;
                     OnPropertyChanged("Character");
                 }
             }

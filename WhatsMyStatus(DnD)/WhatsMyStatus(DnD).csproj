@@ -112,6 +112,7 @@
     </Compile>
     <Compile Include="ViewModels\Core\IChildRelation.cs" />
     <Compile Include="ViewModels\Core\IParentRelation.cs" />
+    <Compile Include="ViewModels\Core\WmsLoadObject.cs" />
     <Compile Include="ViewModels\Core\WmsPrimaryObject.cs" />
     <Compile Include="ViewModels\WmsCharacter.cs" />
     <Compile Include="ViewModels\WmsCharacterStatus.cs" />

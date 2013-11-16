@@ -108,7 +108,7 @@ namespace WhatsMyStatus_DnD_.ViewModels
             {
                 if (removeObj is IChildRelation)
                 {
-                    
+                    ((IChildRelation)removeObj).RemoveFromParent();
                 }
                 if (CachedTypes.ContainsKey(removeObj.GetType()) && 
                     CachedTypes[removeObj.GetType()].Contains(removeObj))

@@ -315,7 +315,7 @@ namespace WhatsMyStatus_DnD_.ViewModels
         /// <returns></returns>
         public IEnumerable<WmsCharacterStatus> GetAfflictedStatuses()
         {
-            return WmsFakeDb.Database.GetRelatedTable<WmsCharacterStatus>(x => x.Character == this);
+            return CharacterStatuses.Where(x => x.AfflictedWithStatus);
         }
 
         /// <summary>
@@ -324,7 +324,7 @@ namespace WhatsMyStatus_DnD_.ViewModels
         /// <returns></returns>
         public IEnumerable<WmsCombat> GetCombats()
         {
-            return WmsFakeDb.Database.GetRelatedTable<WmsCombat>(x => x.Character == this);
+            return Combats;
         }
 
         /// <summary>
@@ -338,26 +338,13 @@ namespace WhatsMyStatus_DnD_.ViewModels
         /// <summary>
         /// Create all the character status's applicable for this character.
         /// </summary>
-        public void CreateCharacterStatuses()
+        public void CreateMissingCharacterStatuses()
         {
             // ***********************************************
             // 			 Method Logic
             // ***********************************************
             try
-            {
-                //var currentStatus = WmsFakeDb.Database.Statuses.ToList();
-                //foreach (var status in currentStatus)
-                //{
-                //    status.Remove();
-                //    status.Dbseqnum = 0;
-                //}
-
-                //foreach(var curstat in currentStatus)
-                //{
-                //    WmsFakeDb.Database.Add(curstat);
-                //}
-               
-
+            {           
                 var currentStatuses = CharacterStatuses.Select(x => x.Status).ToList();
                 var applicableStatuses = WmsFakeDb.Database.Statuses.Where(x => x.GameSystem == this.GameSystem).ToList();
                 foreach(var status in applicableStatuses.Except(currentStatuses))
