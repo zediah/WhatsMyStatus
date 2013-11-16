@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ using WhatsMyStatus_DnD_.ViewModels.Core;
 
 namespace WhatsMyStatus_DnD_.ViewModels
 {
-    public class WmsCharacterStatus : WmsPrimaryObject, INotifyPropertyChanged, IChildRelation
+    public class WmsCharacterStatus : WmsPrimaryObject, INotifyPropertyChanged, IChildRelation, IEditableObject
     {
 
         private int _roundsRemaining;
@@ -66,7 +67,12 @@ namespace WhatsMyStatus_DnD_.ViewModels
 
         public bool ShowRounds
         {
-            get { return Status.RoundsRequired && AfflictedWithStatus; }
+            get { return Status.StatusEndingCondition == E_StatusEndingCondition.Rounds && AfflictedWithStatus; }
+        }
+
+        public bool ShowUntilSaved
+        {
+            get { return Status.StatusEndingCondition == E_StatusEndingCondition.UntilSaved && AfflictedWithStatus; }
         }
 
         private bool _afflictedWithStatus;
@@ -81,9 +87,11 @@ namespace WhatsMyStatus_DnD_.ViewModels
             {
                 if(_afflictedWithStatus != value)
                 {
+                    
                     _afflictedWithStatus = value;
                     NotifyPropertyChanged("AfflictedWithStatus");
                     NotifyPropertyChanged("ShowRounds");
+                    NotifyPropertyChanged("ShowUntilSaved");
                 }
             }
         }
@@ -143,6 +151,21 @@ namespace WhatsMyStatus_DnD_.ViewModels
             {
                 Character.RemoveChildRecord(this);
             }
+        }
+
+        public void BeginEdit()
+        {
+            //
+        }
+
+        public void CancelEdit()
+        {
+            //
+        }
+
+        public void EndEdit()
+        {
+            //
         }
     }
 }

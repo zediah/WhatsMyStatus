@@ -24,9 +24,20 @@
         <TextBlock Text="Effect Description" Margin="10,0"></TextBlock>
         <TextBox Text="{Binding ElementName=this, Path=DataContext.Effect
                         ,Mode=TwoWay}" TextWrapping="Wrap" Height="120"></TextBox>
-        <CheckBox Content="Requires Rounds Shown" IsChecked="{Binding ElementName=this,
-                                                              Path=DataContext.RoundsRequired,
-                                                                Mode=TwoWay}"></CheckBox>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Ending&#x0a;Condition" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            <toolkit:ListPicker Grid.Column="1"
+                                FullModeItemTemplate="{StaticResource enumListPicker}"
+                                ItemTemplate="{StaticResource enumListPicker}"
+                                ItemsSource="{Binding StatusEndingConditions, ElementName=this}"
+                                DataContext="{Binding DataContext, ElementName=this}"
+                                SelectedItem="{Binding StatusEndingCondition, Mode=TwoWay}"></toolkit:ListPicker>
+        </Grid>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"></ColumnDefinition>

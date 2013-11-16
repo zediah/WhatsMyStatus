@@ -85,5 +85,14 @@ namespace WhatsMyStatus_DnD_.Views
             //    cb_ActiveStatus.IsChecked = true;
             //}
         }
+
+        private void btn_MadeSavingThrow_Click(object sender, RoutedEventArgs e)
+        {
+            var context = DataContext as WmsCharacterStatus;
+            if (context != null)
+            {
+                context.AfflictedWithStatus = false;
+            }
+        }
     }
 }

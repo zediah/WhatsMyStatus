@@ -45,10 +45,12 @@ namespace WhatsMyStatus_DnD_
                 tempHpCvs.Source = CurrentCharacter.Combats;
                 tempHpCvs.Filter += (sender, args) => args.Accepted = ((WmsCombat)args.Item).ChangeReason == HpChangeReasons.TempHp && ((WmsCombat)args.Item).Character == CurrentCharacter;
 
+                CurrentCharacter.CreateMissingCharacterStatuses();
+
                 var statusCvs = new CollectionViewSource();
                 statusCvs.Source = CurrentCharacter.CharacterStatuses;
-                statusCvs.SortDescriptions.Add(new SortDescription("IsApplicable", ListSortDirection.Descending));
-                CurrentCharacter.CreateMissingCharacterStatuses();
+                statusCvs.SortDescriptions.Add(new SortDescription("AfflictedWithStatus", ListSortDirection.Descending));
+
                 
                 if (!PhoneApplicationService.Current.State.ContainsKey("Character"))
                 {
@@ -61,7 +63,11 @@ namespace WhatsMyStatus_DnD_
 
                 normalCombat.DataContext = normalHpCvs;
                 tempCombat.DataContext = tempHpCvs;
-                listB.DataContext = statusCvs;
+
+                Binding b = new Binding();
+                b.Source = statusCvs;
+
+                listB.SetBinding(ListBox.ItemsSourceProperty,b);
             }
             UpdateHpTotals();
         }
@@ -171,7 +177,7 @@ namespace WhatsMyStatus_DnD_
 
         private void btn_RoundOver_Click(object sender, RoutedEventArgs e)
         {
-            var statusesWithRounds = CurrentCharacter.GetAfflictedStatuses().Where(x => x.Status.RoundsRequired);
+            var statusesWithRounds = CurrentCharacter.GetAfflictedStatuses().Where(x => x.Status.StatusEndingCondition == E_StatusEndingCondition.Rounds);
             foreach(var charStatus in statusesWithRounds)
             {
                 charStatus.RoundsRemaining--;

@@ -55,19 +55,17 @@ namespace WhatsMyStatus_DnD_.ViewModels
 
         }
 
-        private bool _roundsRequired = false;
+        private E_StatusEndingCondition _statusEndingCondition;
 
-        /// <summary>
-        /// Whether a rounds count is required for this status
-        /// </summary>
-        public bool RoundsRequired
+        public E_StatusEndingCondition StatusEndingCondition
         {
-            get { return _roundsRequired; }
-            set { 
-                if (_roundsRequired != value)
+            get { return _statusEndingCondition; }
+            set
+            {
+                if (_statusEndingCondition != value)
                 {
-                    _roundsRequired = value;
-                    NotifyPropertyChanged("RoundsRequired");
+                    _statusEndingCondition = value;
+                    NotifyPropertyChanged("StatusEndingCondition");
                 }
             }
         }
@@ -121,4 +119,16 @@ namespace WhatsMyStatus_DnD_.ViewModels
             }
         }
     }
+
+    public enum E_StatusEndingCondition
+    {
+        [Description("None")]
+        None = 0,
+        [Description("# Rounds")]
+        Rounds = 1,
+        [Description("Until Saved")]
+        UntilSaved = 2
+    }
+
+    
 }

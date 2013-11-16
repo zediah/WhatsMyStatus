@@ -14,9 +14,16 @@ namespace WhatsMyStatus_DnD_.Views
 {
     public partial class StatusSetupView : UserControl
     {
+        
+
         public ObservableCollection<E_GameSystems> GameSystemses
         {
             get { return new ObservableCollection<E_GameSystems>(Enum.GetValues(typeof(E_GameSystems)).Cast<E_GameSystems>()); }
+        }
+
+        public ObservableCollection<E_StatusEndingCondition> StatusEndingConditions
+        {
+            get { return new ObservableCollection<E_StatusEndingCondition>(Enum.GetValues(typeof(E_StatusEndingCondition)).Cast<E_StatusEndingCondition>()); }
         }
 
         public StatusSetupView()
