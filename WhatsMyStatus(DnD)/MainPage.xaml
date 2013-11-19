@@ -8,17 +8,26 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="clr-namespace:WhatsMyStatus_DnD_.Views"
+    xmlns:ComponentModel="clr-namespace:System.ComponentModel;assembly=System.Windows"
+    xmlns:core="clr-namespace:WhatsMyStatus_DnD_.ViewModels"
+        xmlns:ViewModel="clr-namespace:WhatsMyStatus_DnD_.ViewModels"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True"
+
      >
-
-
-        <!--LayoutRoot is the root grid where all page content is placed-->
     
+    <phone:PhoneApplicationPage.Resources>
+        <CollectionViewSource Source="{Binding Source={StaticResource FakeDb}, Path=Database.Statuses}" x:Key="StatusCv">
+            <!--<CollectionViewSource.SortDescriptions>
+                <ComponentModel:SortDescription PropertyName="Name"></ComponentModel:SortDescription>
+            </CollectionViewSource.SortDescriptions>-->
+        </CollectionViewSource>
+     </phone:PhoneApplicationPage.Resources>
+            <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         
         <phone:Panorama>
@@ -72,15 +81,44 @@
                         </Grid>
                     </StackPanel>
                      <views:StatusSetupView DataContext="{Binding ElementName=CondensedStatusSelector, Path=SelectedItem}" Margin="0,0,0,5" Grid.Row="1" x:Name="StatusSetup"></views:StatusSetupView>
-                    <phone:LongListSelector x:Name="CondensedStatusSelector" ItemsSource="{Binding}" Grid.Row="2">
-                        <phone:LongListSelector.ItemTemplate>
+                    <ListBox x:Name="CondensedStatusSelector" ItemsSource="{Binding Source={StaticResource StatusCv}}" Grid.Row="2">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                                <Setter Property="Margin" Value="0,4,0,4"></Setter>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                        <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <views:StatusSetupViewCondensed x:Name="StatusSetupCondensed"></views:StatusSetupViewCondensed>
                             </DataTemplate>
-                        </phone:LongListSelector.ItemTemplate>
-                    </phone:LongListSelector>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
 
                   </Grid>
+            </phone:PanoramaItem>
+            <phone:PanoramaItem>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="About" FontSize="62" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"></TextBlock>
+
+                    <ScrollViewer Grid.Row="1">
+                            <ItemsControl >
+                            <TextBlock Margin="0,0,0,20" TextWrapping="Wrap" Text="Hello there. First of all - a thanks to you, someone who thought my application was interesting enough to download it."></TextBlock>
+                            <TextBlock Margin="0,0,0,20" TextWrapping="Wrap" Text="While playing DnD with my friends, we all had the mandatory notepad that would contain the scrawl that was our characters current status.Each with our own system of recording that none could deciefer."></TextBlock>
+                            <TextBlock Margin="0,0,0,20" TextWrapping="Wrap" Text="I'm a Software Developer, primary working in Winforms c# and had never touched an app before this. But I thought I'd give it a go."></TextBlock>
+                            <TextBlock Margin="0,0,0,20" TextWrapping="Wrap" Text="So here it is, I hope you find it useful!"></TextBlock>
+                            <TextBlock Margin="0,0,0,20" TextWrapping="Wrap" Text="I'm always looking for more game systems for this app to support, feel free to send me an email to my developer account with a suggestion and willingness to discuss it."></TextBlock>
+                            <TextBlock Margin="0,0,0,20" TextWrapping="Wrap" Text="I want this to be ad free and available to everyone so I won't charge for it but, much like the old shareware days - if you think this is worth it, please use the donate button below to show your appreciation!"></TextBlock>
+                            <Button Name="btn_Donate" Content="Donate" Click="btn_Donate_Click"></Button>
+                            </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
             </phone:PanoramaItem>
 
         </phone:Panorama>

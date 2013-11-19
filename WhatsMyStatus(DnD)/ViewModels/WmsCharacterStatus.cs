@@ -10,7 +10,7 @@ using WhatsMyStatus_DnD_.ViewModels.Core;
 
 namespace WhatsMyStatus_DnD_.ViewModels
 {
-    public class WmsCharacterStatus : WmsPrimaryObject, INotifyPropertyChanged, IChildRelation, IEditableObject
+    public class WmsCharacterStatus : WmsPrimaryObject, INotifyPropertyChanged, IChildRelation
     {
 
         private int _roundsRemaining;
@@ -113,14 +113,15 @@ namespace WhatsMyStatus_DnD_.ViewModels
         /// </summary>
         public void ReduceRoundsRemaining()
         {
-            if (RoundsRemaining > 0)
+            // if we reduce it to 0, turn it off.
+            if (RoundsRemaining > 1)
             {
                 RoundsRemaining--;
             }
             else
             {
                 // There are no rounds remaining - so de select it
-                WmsFakeDb.Database.Remove(this);
+                AfflictedWithStatus = false;
             }
         }
 
@@ -151,21 +152,6 @@ namespace WhatsMyStatus_DnD_.ViewModels
             {
                 Character.RemoveChildRecord(this);
             }
-        }
-
-        public void BeginEdit()
-        {
-            //
-        }
-
-        public void CancelEdit()
-        {
-            //
-        }
-
-        public void EndEdit()
-        {
-            //
         }
     }
 }

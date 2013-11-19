@@ -73,26 +73,6 @@
             </phone:PanoramaItem>
 
             <phone:PanoramaItem>
-                <!--<phone:LongListSelector Name="statusListSelector" Margin="0,-38,-22,2">
-                    <phone:LongListSelector.ListHeaderTemplate>
-                        <DataTemplate>
-                            <Grid Margin="12,0,0,38">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <TextBlock Text="Statuses"
-                                           Style="{StaticResource PanoramaItemHeaderTextStyle}"
-                                           Grid.Row="0"/>
-                            </Grid>
-                        </DataTemplate>
-                    </phone:LongListSelector.ListHeaderTemplate>
-                    <phone:LongListSelector.ItemTemplate>
-                        <DataTemplate>
-                            <views:StatusView Margin="0, 5,0,5"  x:Name="StatusViews"></views:StatusView>
-                        </DataTemplate>
-                    </phone:LongListSelector.ItemTemplate>
-                </phone:LongListSelector>-->
                 <ListBox ItemsSource="{Binding}" Name="listB">
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem">

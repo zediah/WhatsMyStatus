@@ -171,6 +171,7 @@ namespace WhatsMyStatus_DnD_
                         WmsFakeDb.Database.Remove(combat);
                     }
                     CurrentCharacter.Surges = 0;
+                    UpdateHpTotals();
                 }
             }
         }
@@ -180,7 +181,7 @@ namespace WhatsMyStatus_DnD_
             var statusesWithRounds = CurrentCharacter.GetAfflictedStatuses().Where(x => x.Status.StatusEndingCondition == E_StatusEndingCondition.Rounds);
             foreach(var charStatus in statusesWithRounds)
             {
-                charStatus.RoundsRemaining--;
+                charStatus.ReduceRoundsRemaining();
             }
         }
 
@@ -199,7 +200,7 @@ namespace WhatsMyStatus_DnD_
                 Popup popup = new Popup();
 
                 var control = new HealthChangePopup();
-                control.SetDescription("");
+                control.SetDescription("Someone must like you, you're getting extra healing!\nHow much extra?");
 
                 popup.VerticalOffset = 100;
                 popup.HorizontalOffset = 70;

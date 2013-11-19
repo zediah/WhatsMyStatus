@@ -8,7 +8,7 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    d:DesignHeight="400" d:DesignWidth="480">
+    d:DesignHeight="250" d:DesignWidth="480">
     
     <StackPanel x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}">
         <Grid>
@@ -16,22 +16,18 @@
                 <ColumnDefinition Width="1*"></ColumnDefinition>
                 <ColumnDefinition Width="3*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Name" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-            <TextBox Grid.Column="2" Text="{Binding ElementName=this, 
+            <TextBlock  Text="Name" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            <TextBox Name="statusName" Grid.Column="2" Text="{Binding ElementName=this, 
                                             Path=DataContext.Name,
                                             Mode=TwoWay}" ></TextBox>
         </Grid>
-        <TextBlock Text="Effect Description" Margin="10,0"></TextBlock>
-        <TextBox Text="{Binding ElementName=this, Path=DataContext.Effect
-                        ,Mode=TwoWay}" TextWrapping="Wrap" Height="120"></TextBox>
-
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
                 <ColumnDefinition Width="3*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock Text="Ending&#x0a;Condition" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-            <toolkit:ListPicker Grid.Column="1"
+            <toolkit:ListPicker Name="EndingCondition" Grid.Column="1"
                                 FullModeItemTemplate="{StaticResource enumListPicker}"
                                 ItemTemplate="{StaticResource enumListPicker}"
                                 ItemsSource="{Binding StatusEndingConditions, ElementName=this}"
@@ -44,7 +40,7 @@
                 <ColumnDefinition Width="3*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock Text="Game&#x0a;System" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-            <toolkit:ListPicker Grid.Column="1"
+            <toolkit:ListPicker Name="GameSys" Grid.Column="1"
                                 FullModeItemTemplate="{StaticResource enumListPicker}"
                                 ItemTemplate="{StaticResource enumListPicker}"
                                 ItemsSource="{Binding GameSystemses, ElementName=this}"

@@ -1,15 +1,20 @@
 Whats My Status To Do:
 Add Defaults for game systems
-Make "Full Reset" button work - done
-Make "Round Over" button work - done
-Add "Spend Surge" and "Spend Surge (+ Bonus)" buttons - done
-Add "About" page
 Add damage per round
-Add "Last Until Save" check to status
-	- This includes adding something to the status to indicate this
 Add conditions? e.g. < 50% max hp for bloodied
-Order the status list of those checked first - half done
+Order the status list of those checked first - Still needs to update on edit
 Add a filter for status's area?
 Make the status setup slightly smaller
-Make the status's filter based on game system of character - done
 Make it noticeable that one status is selected
+
+Make "Donate" button work
+
+Done:
+Make "Full Reset" button work
+Make "Round Over" button work
+Add "Spend Surge" and "Spend Surge (+ Bonus)" buttons 
+Add "Last Until Save" check to status
+	- This includes adding something to the status to indicate this
+Make the status's filter based on game system of character - done
+Add "About" page
+Make the "+" button for statuses use the current filled in information if none selected

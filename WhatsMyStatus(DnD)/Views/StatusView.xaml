@@ -20,7 +20,8 @@
                 <ColumnDefinition Width="2*"></ColumnDefinition>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40" Text="{Binding Status.Name}"></TextBlock>
+            <TextBlock Grid.Column="0" Grid.ColumnSpan="{Binding ElementName=this, Path=DataContext.AfflictedWithStatus, FallbackValue=2, Converter={StaticResource BoolToColumnSpanConverter}}" 
+                       TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="40" Text="{Binding Status.Name}"></TextBlock>
             <Button Name="btn_MadeSavingThrow" Content="I Saved!" Grid.Column="1" Click="btn_MadeSavingThrow_Click" 
                     Visibility="{Binding ElementName=this, Path=DataContext.ShowUntilSaved, FallbackValue=Collapsed, Converter={StaticResource ResourceKey=VisibilityConverter}}"></Button>
             <views:StatusRoundsView Grid.Column="1" Name="statusRoundView" DataContext="{Binding ElementName=this, Path=DataContext}"

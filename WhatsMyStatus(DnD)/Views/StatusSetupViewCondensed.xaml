@@ -21,19 +21,16 @@
             <ColumnDefinition Width="1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <TextBlock VerticalAlignment="Center" FontSize="32" Grid.Column="0" Text="{Binding ElementName=this, Path=DataContext.Name}"></TextBlock>
+        <TextBlock VerticalAlignment="Center" FontSize="32" Grid.Column="0" Text="{Binding ElementName=this, Path=DataContext.Name, Mode=TwoWay}"></TextBlock>
          <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Border BorderThickness="1,0,0,1" BorderBrush="White" Grid.Row="0">
-                <StackPanel>
-                    <TextBlock Grid.Row="0" Text="Rounds Shown:" HorizontalAlignment="Center"></TextBlock>
-                    <TextBlock Grid.Row="0" HorizontalAlignment="Center" Text="{Binding ElementName=this, Path=DataContext.RoundsRequired,
-                                    Converter={StaticResource BoolToStringConverter}}"></TextBlock>
-
-                </StackPanel>
+                <TextBlock HorizontalAlignment="Center" Grid.Row="1" Text="{Binding ElementName=this, 
+                                            Path=DataContext.StatusEndingCondition, 
+                                        Converter={StaticResource EnumToStringConverter}}"></TextBlock>
             </Border>
             <Border BorderThickness="1,0,0,0" BorderBrush="White" Grid.Row="1">
                 <TextBlock HorizontalAlignment="Center" Grid.Row="1" Text="{Binding ElementName=this, 

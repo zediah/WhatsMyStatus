@@ -30,5 +30,29 @@ namespace WhatsMyStatus_DnD_.Views
         {
             InitializeComponent();
         }
+
+        /// <summary>
+        /// Based off the current values in the setup, creates and returns a status (but doesn't add it yet)
+        /// </summary>
+        /// <returns></returns>
+        public WmsStatus CreateNewStatusFromSelections()
+        {
+            WmsStatus returnValue = null;
+            // ***********************************************
+            // 			 Method Logic
+            // ***********************************************
+            try
+            {
+                returnValue = new WmsStatus();
+                returnValue.Name = string.IsNullOrWhiteSpace(statusName.Text) ? "No Name" : statusName.Text;
+                returnValue.GameSystem = GameSys.SelectedItem == null ? default(E_GameSystems) : (E_GameSystems)GameSys.SelectedItem;
+                returnValue.StatusEndingCondition = EndingCondition.SelectedItem == null ? default(E_StatusEndingCondition) : (E_StatusEndingCondition) EndingCondition.SelectedItem;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return returnValue;
+        }
     }
 }

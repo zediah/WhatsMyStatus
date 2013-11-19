@@ -31,7 +31,6 @@ namespace WhatsMyStatus_DnD_
             }
 
             CharacterViewOnPage.DataContext = WmsFakeDb.Database.Characters;
-            CondensedStatusSelector.DataContext = WmsFakeDb.Database.Statuses;
         }
 
         private void AddCharacterClick(object sender, RoutedEventArgs e)
@@ -66,18 +65,27 @@ namespace WhatsMyStatus_DnD_
 
         private void AddStatusClick(object sender, RoutedEventArgs e)
         {
-            // Create a new one, it's an observable collection - should be automatically seen in the setup...
-            WmsFakeDb.Database.Add(new WmsStatus() {Name = "No Name"});
+            // If we don't have one selected yet, the user may have entered details and then hit the plus button
+            // Thinking that was how it worked...so, fill in the details based on what we see
+            if (StatusSetup.DataContext == null)
+            {
+                
+                WmsStatus newStatus = StatusSetup.CreateNewStatusFromSelections();
+                WmsFakeDb.Database.Add(newStatus);
+                CondensedStatusSelector.SelectedItem = newStatus;
+            }
+            else
+            {
+                // Create a new one, it's an observable collection - should be automatically seen in the setup...
+                WmsFakeDb.Database.Add(new WmsStatus() { Name = "No Name" });
+            }
+
         }
 
-        private void CondensedStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //CondensedStatusSelector.
-            //var item = e.AddedItems.Cast<ListBoxItem>().FirstOrDefault();
-            //item.Background = new SolidColorBrush(Colors.Gray);
 
-            //var removedItem = e.RemovedItems.Cast<ListBoxItem>().FirstOrDefault();
-            //removedItem.Background = new SolidColorBrush(Colors.LightGray);
+        private void btn_Donate_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

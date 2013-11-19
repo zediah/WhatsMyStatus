@@ -5,13 +5,14 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:sys="clr-namespace:System;assembly=mscorlib" 
-    xmlns:converter="clr-namespace:WhatsMyStatus_DnD_.Converters">
+    xmlns:converter="clr-namespace:WhatsMyStatus_DnD_.Converters" 
+    xmlns:ViewModels="clr-namespace:WhatsMyStatus_DnD_.ViewModels">
     
 
     <!--Application Resources-->
     <Application.Resources>
         <sys:Double x:Key="PanoramaItemHeaderFontSize">66</sys:Double>
-
+        <ViewModels:WmsFakeDb x:Key="FakeDb" />
         <Style x:Key="PanoramaItemHeaderTextStyle" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiLight}"/>
             <Setter Property="FontSize" Value="{StaticResource PanoramaItemHeaderFontSize}"/>
@@ -23,6 +24,7 @@
         <converter:VisibilityConverter x:Key="VisibilityConverter"/>
         <converter:EnumToStringConverter x:Key="EnumToStringConverter"/>
         <converter:BoolToStringConverter x:Key="BoolToStringConverter"/>
+        <converter:BoolToColumnSpanConverter x:Key="BoolToColumnSpanConverter"/>
 
         <DataTemplate x:Name="enumListPicker">
             <StackPanel>

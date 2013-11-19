@@ -32,7 +32,7 @@ namespace WhatsMyStatus_DnD_.Views
             var charStatus = DataContext as WmsCharacterStatus;
             if (charStatus != null)
             {
-                charStatus.RoundsRemaining--;
+                charStatus.ReduceRoundsRemaining();
             }
         }
     }

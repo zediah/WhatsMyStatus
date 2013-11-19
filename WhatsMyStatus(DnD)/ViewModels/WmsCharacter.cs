@@ -294,7 +294,7 @@ namespace WhatsMyStatus_DnD_.ViewModels
             }
             else
             {
-                MessageBox.Show("Unable to spend a surge.\nYou have none you silly duffa!","Surge Unsuccesful", MessageBoxButton.OK);
+                MessageBox.Show("You have none you silly duffa!", "Unable to spend a surge", MessageBoxButton.OK);
             }
         }
 
@@ -307,6 +307,12 @@ namespace WhatsMyStatus_DnD_.ViewModels
             {
                 Surges--;
             }
+            else
+            {
+                MessageBox.Show("If you keep trying to go into negative surges, I'll add it as damage.",
+                                "Minimum # of Surges is 0", MessageBoxButton.OK);
+;
+            }
         }
 
         /// <summary>
@@ -315,7 +321,7 @@ namespace WhatsMyStatus_DnD_.ViewModels
         /// <returns></returns>
         public IEnumerable<WmsCharacterStatus> GetAfflictedStatuses()
         {
-            return CharacterStatuses.Where(x => x.AfflictedWithStatus);
+            return CharacterStatuses.Where(x => x.AfflictedWithStatus).ToList();
         }
 
         /// <summary>
@@ -324,7 +330,8 @@ namespace WhatsMyStatus_DnD_.ViewModels
         /// <returns></returns>
         public IEnumerable<WmsCombat> GetCombats()
         {
-            return Combats;
+            // don't return the actual collection, just a version of it!
+            return Combats.ToList();
         }
 
         /// <summary>
