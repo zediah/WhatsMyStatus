@@ -120,6 +120,7 @@
     <Compile Include="ViewModels\WmsCombat.cs" />
     <Compile Include="ViewModels\WmsFakeDb.cs" />
     <Compile Include="ViewModels\WmsStatus.cs" />
+    <Compile Include="ViewModels\WmsStatusFilter.cs" />
     <Compile Include="Views\CharacterView.xaml.cs">
       <DependentUpon>CharacterView.xaml</DependentUpon>
     </Compile>
@@ -131,6 +132,9 @@
     </Compile>
     <Compile Include="Views\Dialogs\HealthChangePopup.xaml.cs">
       <DependentUpon>HealthChangePopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\StatusFilterPopup.xaml.cs">
+      <DependentUpon>StatusFilterPopup.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StatusSetupViewCondensed.xaml.cs">
       <DependentUpon>StatusSetupViewCondensed.xaml</DependentUpon>
@@ -171,6 +175,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Dialogs\HealthChangePopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\StatusFilterPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

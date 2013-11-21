@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Microsoft.Phone.Shell;
 using WhatsMyStatus_DnD_.ViewModels.Core;
 
@@ -116,6 +117,49 @@ namespace WhatsMyStatus_DnD_.ViewModels
             if (wmsCharStatus != null)
             {
                 CharacterStatuses.Remove(wmsCharStatus);
+            }
+        }
+
+        /// <summary>
+        /// Given the game system, creates the default status effects known for that system.
+        /// </summary>
+        /// <param name="forGameSystem"></param>
+        public static void CreateDefaultStatuses(E_GameSystems forGameSystem)
+        {
+            // ***********************************************
+            // 			 Method Logic
+            // ***********************************************
+            try
+            {
+                var toBeAdded = new List<Tuple<string, E_StatusEndingCondition>>();
+                var currentStatuses = WmsFakeDb.Database.GetRelatedTable<WmsStatus>(x => x.GameSystem == forGameSystem)
+                                                        .ToDictionary(x => Tuple.Create(x.Name, x.StatusEndingCondition));
+                switch(forGameSystem)
+                {
+                    case E_GameSystems.DNDFourth:
+                        toBeAdded.Add(Tuple.Create("Bloodied", E_StatusEndingCondition.None));
+                        toBeAdded.Add(Tuple.Create("Prone", E_StatusEndingCondition.None));
+                        toBeAdded.Add(Tuple.Create("Unconscious", E_StatusEndingCondition.None));
+                        toBeAdded.Add(Tuple.Create("Stunned", E_StatusEndingCondition.None));
+                        toBeAdded.Add(Tuple.Create("Dazed", E_StatusEndingCondition.None));
+                        toBeAdded.Add(Tuple.Create("Weakened", E_StatusEndingCondition.None));
+                        break;
+                }
+
+                // Make sure we only create ones that we don't have already.
+                foreach(var status in toBeAdded.Where(x => !currentStatuses.ContainsKey(x)))
+                {
+                    var newStatus = new WmsStatus();
+                    newStatus.GameSystem = forGameSystem;
+                    newStatus.Name = status.Item1;
+                    newStatus.StatusEndingCondition = status.Item2;
+                    WmsFakeDb.Database.Add(newStatus);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
             }
         }
     }

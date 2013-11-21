@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
@@ -16,10 +19,14 @@ namespace WhatsMyStatus_DnD_
 {
     public partial class MainPage : PhoneApplicationPage
     {
+        public WmsStatusFilter StatusFilter { get; set; }
+        public WmsStatusFilter DefaultsFilter { get; set; }
+
         public MainPage()
         {
             InitializeComponent();
         }
+
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -86,6 +93,118 @@ namespace WhatsMyStatus_DnD_
         private void btn_Donate_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void btn_StatusFilter_Click(object sender, RoutedEventArgs e)
+        {
+            // ***********************************************
+            // 			 Method Logic
+            // ***********************************************
+            try
+            {
+                Popup popup = new Popup();
+
+                var control = new StatusFilterPopup();
+                if (StatusFilter == null)
+                {
+                    StatusFilter = new WmsStatusFilter();
+                }
+                control.DataContext = StatusFilter;
+                popup.VerticalOffset = 100;
+                popup.HorizontalOffset = 70;
+
+                control.btn_done.Click += (o, args) =>
+                {
+                    popup.IsOpen = false;
+                    ((ICollectionView) CondensedStatusSelector.ItemsSource).Refresh();
+                };
+
+                popup.Child = control;
+                popup.IsOpen = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+      
+        }
+
+        public void UpdateFilter()
+        {
+            // ***********************************************
+            // 			 Method Logic
+            // ***********************************************
+            try
+            {
+                if (Resources.Contains("StatusCv"))
+                {
+                    var statusCv = Resources["StatusCv"] as CollectionViewSource;
+                    statusCv.Filter +=statusCv_Filter;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+      
+        }
+
+        public void statusCv_Filter(object sender, FilterEventArgs e)
+        {
+            // ***********************************************
+            // 			 Method Logic
+            // ***********************************************
+            try
+            {
+                if (StatusFilter == null)
+                {
+                    StatusFilter = new WmsStatusFilter();
+                }
+                var item = e.Item as WmsStatus;
+                if (item != null)
+                {
+                    e.Accepted = !StatusFilter.FilterGameSystem.HasValue || StatusFilter.FilterGameSystem.Value == item.GameSystem;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+      
+        }
+
+        private void btn_AddDefaults_Click(object sender, RoutedEventArgs e)
+        {
+            // ***********************************************
+            // 			 Method Logic
+            // ***********************************************
+            try
+            {
+                Popup popup = new Popup();
+
+                var control = new StatusFilterPopup();
+                if (DefaultsFilter == null)
+                {
+                    DefaultsFilter = new WmsStatusFilter();
+                }
+                control.DataContext = DefaultsFilter;
+                popup.VerticalOffset = 100;
+                popup.HorizontalOffset = 70;
+
+                control.btn_done.Click += (o, args) =>
+                {
+                    popup.IsOpen = false;
+                    WmsStatus.CreateDefaultStatuses(DefaultsFilter.FilterGameSystem.GetValueOrDefault());
+                };
+
+                popup.Child = control;
+                popup.IsOpen = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+      
         }
     }
 }

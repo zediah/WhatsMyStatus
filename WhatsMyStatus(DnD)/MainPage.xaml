@@ -8,9 +8,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="clr-namespace:WhatsMyStatus_DnD_.Views"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:ComponentModel="clr-namespace:System.ComponentModel;assembly=System.Windows"
-    xmlns:core="clr-namespace:WhatsMyStatus_DnD_.ViewModels"
-        xmlns:ViewModel="clr-namespace:WhatsMyStatus_DnD_.ViewModels"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -21,10 +20,10 @@
      >
     
     <phone:PhoneApplicationPage.Resources>
-        <CollectionViewSource Source="{Binding Source={StaticResource FakeDb}, Path=Database.Statuses}" x:Key="StatusCv">
-            <!--<CollectionViewSource.SortDescriptions>
+        <CollectionViewSource Filter="statusCv_Filter" Source="{Binding Source={StaticResource FakeDb}, Path=Database.Statuses}" x:Key="StatusCv">
+            <CollectionViewSource.SortDescriptions>
                 <ComponentModel:SortDescription PropertyName="Name"></ComponentModel:SortDescription>
-            </CollectionViewSource.SortDescriptions>-->
+            </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
      </phone:PhoneApplicationPage.Resources>
             <!--LayoutRoot is the root grid where all page content is placed-->
@@ -66,6 +65,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
 
@@ -81,7 +81,15 @@
                         </Grid>
                     </StackPanel>
                      <views:StatusSetupView DataContext="{Binding ElementName=CondensedStatusSelector, Path=SelectedItem}" Margin="0,0,0,5" Grid.Row="1" x:Name="StatusSetup"></views:StatusSetupView>
-                    <ListBox x:Name="CondensedStatusSelector" ItemsSource="{Binding Source={StaticResource StatusCv}}" Grid.Row="2">
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Name="btn_StatusFilter" Content="Filter" Click="btn_StatusFilter_Click"></Button>
+                        <Button Grid.Column="1" Name="btn_AddDefaults" Content="Add Defaults" Click="btn_AddDefaults_Click"></Button>
+                    </Grid>
+                    <ListBox  x:Name="CondensedStatusSelector" ItemsSource="{Binding Source={StaticResource StatusCv}}" Grid.Row="3">
                         <ListBox.ItemContainerStyle>
                             <Style TargetType="ListBoxItem">
                                 <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
