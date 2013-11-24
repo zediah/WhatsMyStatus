@@ -10,6 +10,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using WhatsMyStatus_DnD_.Resources;
 using WhatsMyStatus_DnD_.ViewModels;
+using Windows.ApplicationModel.Store;
 
 namespace WhatsMyStatus_DnD_
 {
@@ -20,6 +21,8 @@ namespace WhatsMyStatus_DnD_
         /// </summary>
         /// <returns>The root frame of the Phone Application.</returns>
         public static PhoneApplicationFrame RootFrame { get; private set; }
+
+        public LicenseInformation licenceInfo { get; set; }
 
         /// <summary>
         /// Constructor for the Application object.
@@ -58,6 +61,11 @@ namespace WhatsMyStatus_DnD_
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
 
+        }
+
+        private void AppInit()
+        {
+            
         }
 
         // Code to execute when the application is launching (eg, from Start)

@@ -92,7 +92,19 @@ namespace WhatsMyStatus_DnD_
 
         private void btn_Donate_Click(object sender, RoutedEventArgs e)
         {
-
+            // ***********************************************
+            // 			 Method Logic
+            // ***********************************************
+            try
+            {
+                    var mainFrame = Application.Current.RootVisual as PhoneApplicationFrame;
+                    mainFrame.Navigate(new Uri("/DonationsPage.xaml?", UriKind.Relative));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+      
         }
 
         private void btn_StatusFilter_Click(object sender, RoutedEventArgs e)

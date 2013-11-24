@@ -89,14 +89,7 @@
                         <Button Name="btn_StatusFilter" Content="Filter" Click="btn_StatusFilter_Click"></Button>
                         <Button Grid.Column="1" Name="btn_AddDefaults" Content="Add Defaults" Click="btn_AddDefaults_Click"></Button>
                     </Grid>
-                    <ListBox  x:Name="CondensedStatusSelector" ItemsSource="{Binding Source={StaticResource StatusCv}}" Grid.Row="3">
-                        <ListBox.ItemContainerStyle>
-                            <Style TargetType="ListBoxItem">
-                                <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
-                                <Setter Property="Margin" Value="0,4,0,4"></Setter>
-                            </Style>
-                        </ListBox.ItemContainerStyle>
+                    <ListBox  x:Name="CondensedStatusSelector" ItemContainerStyle="{StaticResource lb_SelectionHighlight}" toolkit:TiltEffect.IsTiltEnabled="True" ItemsSource="{Binding Source={StaticResource StatusCv}}" Grid.Row="3">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <views:StatusSetupViewCondensed x:Name="StatusSetupCondensed"></views:StatusSetupViewCondensed>

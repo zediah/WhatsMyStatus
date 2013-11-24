@@ -15,7 +15,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="480" d:DesignWidth="480">
 
-    <ListBox ItemsSource="{Binding}"  Hold="lb_Hold" Name="lb" HorizontalContentAlignment="Stretch" Tap="lb_Tap">
+    <ListBox ItemsSource="{Binding}" Name="lb" HorizontalContentAlignment="Stretch" Tap="lb_Tap">
         <ListBox.ItemContainerStyle>
             <Style TargetType="ListBoxItem">
                 <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>

@@ -30,11 +30,6 @@ namespace WhatsMyStatus_DnD_.Views
             }
         }
 
-        private void lb_Hold(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-
-        }
-
         private void miEdit_Click(object sender, RoutedEventArgs e)
         {
             Popup popup = new Popup();
